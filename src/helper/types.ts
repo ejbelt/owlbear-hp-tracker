@@ -3,6 +3,7 @@ export type HpTrackerMetadata = {
     hp: number;
     maxHp: number;
     armorClass: number;
+    armorClassSpecial: number;
     hpTrackerActive: boolean;
     canPlayersSee: boolean;
     hpOnMap: boolean;

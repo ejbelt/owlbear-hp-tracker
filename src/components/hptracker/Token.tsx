@@ -74,6 +74,9 @@ export const Token = (props: TokenProps) => {
             if (data.armorClass < 0) {
                 handleValueChange(0, "armorClass");
             }
+            if (data.armorClassSpecial < 0) {
+                handleValueChange(0, "armorClassSpecial");
+            }
         }
     }, [allowNegativNumbers]);
 
@@ -116,6 +119,13 @@ export const Token = (props: TokenProps) => {
                         armorClass: currentData.armorClass,
                     });
                     setData({ ...data, armorClass: currentData.armorClass });
+                } else if (key === "armorClassSpecial") {
+                    currentData.armorClassSpecial = allowNegativNumbers ? Number(value) : Math.max(Number(value), 0);
+                    updateText(data.hpOnMap || data.acOnMap, data.canPlayersSee && props.item.visible, props.item.id, {
+                        ...data,
+                        armorClassSpecial: currentData.armorClassSpecial,
+                    });
+                    setData({ ...data, armorClassSpecial: currentData.armorClassSpecial });
                 } else if (key === "maxHP") {
                     currentData.maxHp = Math.max(Number(value), 0);
                     if (updateHp && currentData.maxHp < currentData.hp) {
@@ -282,14 +292,14 @@ export const Token = (props: TokenProps) => {
                         }}
                     />
                     <button
-                        title={"Toggle AC displayed on Map"}
-                        className={`toggle-button ac ${data.acOnMap ? "on" : "off"}`}
+                        title={"Toggle ACP/ACS displayed on Map"}
+                        className={`toggle-button ac acs ${data.acOnMap ? "on" : "off"}`}
                         onClick={() => {
                             handleValueChange(!data.acOnMap, "acOnMap");
                         }}
                     />
                     <button
-                        title={"Toggle HP/AC visibility for players"}
+                        title={"Toggle HP/ACP/ACS visibility for players"}
                         className={`toggle-button players ${data.canPlayersSee ? "on" : "off"}`}
                         onClick={() => {
                             handleValueChange(!data.canPlayersSee, "players");
@@ -370,6 +380,28 @@ export const Token = (props: TokenProps) => {
                             handleValueChange(data.armorClass + 1, "armorClass");
                         } else if (e.key === "ArrowDown") {
                             handleValueChange(data.armorClass - 1, "armorClass");
+                        }
+                    }}
+                />
+            </div>
+            <div className={"armor-class-special"}>
+                <input
+                    type={"text"}
+                    size={1}
+                    value={data.armorClassSpecial}
+                    onChange={(e) => {
+                        let factor = 1;
+                        if (allowNegativNumbers) {
+                            factor = e.target.value.startsWith("-") ? -1 : 1;
+                        }
+                        const value = Number(e.target.value.replace(/[^0-9]/g, ""));
+                        handleValueChange(value * factor, "armorClassSpecial");
+                    }}
+                    onKeyDown={(e) => {
+                        if (e.key === "ArrowUp") {
+                            handleValueChange(data.armorClassSpecial + 1, "armorClassSpecial");
+                        } else if (e.key === "ArrowDown") {
+                            handleValueChange(data.armorClassSpecial - 1, "armorClassSpecial");
                         }
                     }}
                 />

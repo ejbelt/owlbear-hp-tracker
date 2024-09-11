@@ -135,6 +135,16 @@
                 background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8' standalone='no'%3F%3E%3Csvg xml:space='preserve' id='svg5' version='1.1' viewBox='0 0 50 50' height='50mm' width='50mm' xmlns='http://www.w3.org/2000/svg' xmlns:svg='http://www.w3.org/2000/svg'%3E%3Cdefs id='defs2'%3E%3Crect x='341.01865' y='385.832' width='113.67288' height='76.51059' id='rect363' /%3E%3Crect x='341.01865' y='385.832' width='113.67288' height='76.51059' id='rect363-5' /%3E%3C/defs%3E%3Cg id='layer1' transform='translate(-80,-40)'%3E%3Ccircle style='fill:%23808080;stroke-width:0.265965' id='path111-3-88' cx='105' cy='65.055893' r='25' /%3E%3Ccircle style='fill:%23cccccc;stroke-width:0.212772' id='path111-3-8-3' cx='105' cy='65.055893' r='20' /%3E%3Cpath d='m 104.99998,80.055893 q -5.249985,-1.312498 -8.624975,-6.093749 -3.37501,-4.78125 -3.37501,-10.48125 v -8.925001 l 11.999985,-4.5 12.00003,4.5 v 8.925001 q 0,5.7 -3.37501,10.48125 -3.37499,4.781251 -8.62502,6.093749 z m 0,-2.324999 q 4.31253,-1.424999 7.03125,-5.381249 2.71878,-3.95625 2.71878,-8.868751 v -7.350001 l -9.75003,-3.674999 -9.749985,3.674999 v 7.350001 q 0,4.912501 2.71874,8.868751 2.718765,3.95625 7.031245,5.381249 z m 0,-12.6375 z' id='path1077' style='stroke-width:0.0375001' /%3E%3Crect style='opacity:1;fill:%23000000;stroke-width:0.305968' id='rect1368' width='37.575268' height='2.5619502' x='101.39405' y='-29.62179' transform='rotate(45.051846)' /%3E%3C/g%3E%3C/svg%3E%0A");
             }
         }
+
+        .acs {
+            &.on {
+                background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8' standalone='no'%3F%3E%3Csvg xml:space='preserve' id='svg5' version='1.1' viewBox='0 0 50 50' height='50mm' width='50mm' xmlns='http://www.w3.org/2000/svg' xmlns:svg='http://www.w3.org/2000/svg'%3E%3Cdefs id='defs2'%3E%3Crect x='341.01865' y='385.832' width='113.67288' height='76.51059' id='rect363' /%3E%3Crect x='341.01865' y='385.832' width='113.67288' height='76.51059' id='rect363-5' /%3E%3C/defs%3E%3Cg id='layer1' transform='translate(-80,-40)'%3E%3Ccircle style='fill:%23808080;stroke-width:0.265965' id='path111-3-88' cx='105' cy='65.055893' r='25' /%3E%3Ccircle style='fill:%23cccccc;stroke-width:0.212772' id='path111-3-8-3' cx='105' cy='65.055893' r='20' /%3E%3Cpath d='m 104.99998,80.055893 q -5.249985,-1.312498 -8.624975,-6.093749 -3.37501,-4.78125 -3.37501,-10.48125 v -8.925001 l 11.999985,-4.5 12.00003,4.5 v 8.925001 q 0,5.7 -3.37501,10.48125 -3.37499,4.781251 -8.62502,6.093749 z m 0,-2.324999 q 4.31253,-1.424999 7.03125,-5.381249 2.71878,-3.95625 2.71878,-8.868751 v -7.350001 l -9.75003,-3.674999 -9.749985,3.674999 v 7.350001 q 0,4.912501 2.71874,8.868751 2.718765,3.95625 7.031245,5.381249 z m 0,-12.6375 z' id='path1077' style='stroke-width:0.0375001' /%3E%3C/g%3E%3C/svg%3E%0A");
+            }
+
+            &.off {
+                background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8' standalone='no'%3F%3E%3Csvg xml:space='preserve' id='svg5' version='1.1' viewBox='0 0 50 50' height='50mm' width='50mm' xmlns='http://www.w3.org/2000/svg' xmlns:svg='http://www.w3.org/2000/svg'%3E%3Cdefs id='defs2'%3E%3Crect x='341.01865' y='385.832' width='113.67288' height='76.51059' id='rect363' /%3E%3Crect x='341.01865' y='385.832' width='113.67288' height='76.51059' id='rect363-5' /%3E%3C/defs%3E%3Cg id='layer1' transform='translate(-80,-40)'%3E%3Ccircle style='fill:%23808080;stroke-width:0.265965' id='path111-3-88' cx='105' cy='65.055893' r='25' /%3E%3Ccircle style='fill:%23cccccc;stroke-width:0.212772' id='path111-3-8-3' cx='105' cy='65.055893' r='20' /%3E%3Cpath d='m 104.99998,80.055893 q -5.249985,-1.312498 -8.624975,-6.093749 -3.37501,-4.78125 -3.37501,-10.48125 v -8.925001 l 11.999985,-4.5 12.00003,4.5 v 8.925001 q 0,5.7 -3.37501,10.48125 -3.37499,4.781251 -8.62502,6.093749 z m 0,-2.324999 q 4.31253,-1.424999 7.03125,-5.381249 2.71878,-3.95625 2.71878,-8.868751 v -7.350001 l -9.75003,-3.674999 -9.749985,3.674999 v 7.350001 q 0,4.912501 2.71874,8.868751 2.718765,3.95625 7.031245,5.381249 z m 0,-12.6375 z' id='path1077' style='stroke-width:0.0375001' /%3E%3Crect style='opacity:1;fill:%23000000;stroke-width:0.305968' id='rect1368' width='37.575268' height='2.5619502' x='101.39405' y='-29.62179' transform='rotate(45.051846)' /%3E%3C/g%3E%3C/svg%3E%0A");
+            }
+        }
     }
 
     .current-hp {
@@ -169,7 +179,27 @@
         }
 
         &::before {
-            content: "AC: ";
+            content: "ACP: ";
+
+            @include breakpoint.laptop {
+                display: none;
+            }
+        }
+    }
+
+    .armor-class-special {
+        display: flex;
+        justify-self: flex-end;
+        gap: 5px;
+        min-width: 20px;
+        text-align: right;
+
+        @include breakpoint.laptop {
+            justify-self: center;
+        }
+
+        &::before {
+            content: "ACS: ";
 
             @include breakpoint.laptop {
                 display: none;

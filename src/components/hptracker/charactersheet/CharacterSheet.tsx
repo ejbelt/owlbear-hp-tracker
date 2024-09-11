@@ -15,16 +15,17 @@ export const Open5eSheet = ({ slug }: { slug: string }) => {
 
     const specialAbillities = data && typeof data.special_abilities !== "string" ? data.special_abilities : [];
 
-    const updateValues = (maxHp: number, ac: number) => {
+    const updateValues = (maxHp: number, ac: number, acs: number) => {
         if (characterId) {
             OBR.scene.items.updateItems([characterId], (items) => {
                 items.forEach((item) => {
                     const data = item.metadata[characterMetadata] as HpTrackerMetadata;
-                    if (data.hp === 0 && data.maxHp === 0 && data.armorClass === 0) {
+                    if (data.hp === 0 && data.maxHp === 0 && data.armorClass === 0 && data.armorClassSpecial === 0) {
                         item.metadata[characterMetadata] = {
                             ...data,
                             maxHp: maxHp,
                             armorClass: ac,
+                            armorClassSpecial: acs,
                             hp: maxHp,
                         };
                     }
@@ -35,7 +36,7 @@ export const Open5eSheet = ({ slug }: { slug: string }) => {
 
     useEffect(() => {
         if (monsterQuery.isSuccess && data) {
-            updateValues(data.hit_points, data.armor_class);
+            updateValues(data.hit_points, data.armor_class, data.armor_class_special);
         }
     }, [monsterQuery.isSuccess]);
 
@@ -51,7 +52,10 @@ export const Open5eSheet = ({ slug }: { slug: string }) => {
                     </div>
                     <div className={"values"}>
                         <span className={"ac"}>
-                            <b>Armor Class</b> {data.armor_class} ({data.armor_desc})
+                            <b>Armor Class (Physical)</b> {data.armor_class} ({data.armor_desc})
+                        </span>
+                        <span className={"acs"}>
+                            <b>Armor Class (Special)</b> {data.armor_class_special} ({data.armor_desc})
                         </span>
                         <span className={"hp"}>
                             <b>Hit Points</b> {data.hit_points} ({data.hit_dice})
@@ -159,7 +163,8 @@ const SearchResult = ({ entries }: { entries: Array<SearchResult> }) => {
                     <li className={"search-result"} key={entry.slug} onClick={() => setSheet(entry.slug)}>
                         <span>{entry.name}</span>
                         <span>HP: {entry.hit_points}</span>
-                        <span>AC: {entry.armor_class}</span>
+                        <span>ACP: {entry.armor_class}</span>
+                        <span>ACS: {entry.armor_class_special}</span>
                         <span>CR: {entry.cr}</span>
                     </li>
                 );

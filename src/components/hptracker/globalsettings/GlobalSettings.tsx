@@ -85,7 +85,7 @@ export const GlobalSettings = ({ sceneId }: { sceneId: string }) => {
                         />
                     </div>
                     <div className={"negative-numbers setting"}>
-                        Allow negative HP/AC:
+                        Allow negative HP/ACP/ACS:
                         <input
                             type={"checkbox"}
                             checked={allowNegativNumbers}
