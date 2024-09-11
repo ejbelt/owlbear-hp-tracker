@@ -5,6 +5,7 @@ import { migrate105To106 } from "../migrations/v106.ts";
 import { compare } from "compare-versions";
 import {
     ACItemChanges,
+    ACSItemChanges,
     BarItemChanges,
     HpTrackerMetadata,
     RoomMetadata,
@@ -23,7 +24,7 @@ import {
 } from "../helper/hpHelpers.ts";
 import { v4 as uuidv4 } from "uuid";
 import { migrateTo140 } from "../migrations/v140.ts";
-import { saveOrChangeAC, updateAc, updateAcChanges, updateAcVisibility } from "../helper/acHelper.ts";
+import { saveOrChangeAC, updateAc, updateAcChanges, updateAcVisibility, updateAcsVisibility, updateAcsChanges, updateAcs } from "../helper/acHelper.ts";
 import { migrateTo141 } from "../migrations/v141.ts";
 import { attachmentFilter, getAttachedItems, getInitialValues } from "../helper/helpers.ts";
 import { migrateTo160 } from "../migrations/v160.ts";
@@ -42,12 +43,14 @@ const initItems = async () => {
     const barChanges = new Map<string, BarItemChanges>();
     const textChanges = new Map<string, TextItemChanges>();
     const acChanges = new Map<string, ACItemChanges>();
+    const acsChanges = new Map<string, ACItemChanges>();
 
     for (const token of tokens) {
         const data = token.metadata[itemMetadataKey] as HpTrackerMetadata;
         const barAttachments = (await getAttachedItems(token.id, ["SHAPE"])).filter((a) => attachmentFilter(a, "BAR"));
         const textAttachments = (await getAttachedItems(token.id, ["TEXT"])).filter((a) => attachmentFilter(a, "HP"));
         const acAttachments = (await getAttachedItems(token.id, ["CURVE"])).filter((a) => attachmentFilter(a, "AC"));
+        const acsAttachments = (await getAttachedItems(token.id, ["CURVE"])).filter((a) => attachmentFilter(a, "ACS"));
 
         if (data.hpBar) {
             await saveOrChangeBar(token, data, barAttachments, barChanges);

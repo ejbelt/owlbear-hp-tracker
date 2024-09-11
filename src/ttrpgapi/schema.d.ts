@@ -181,6 +181,12 @@ export interface components {
       /** Special */
       special?: string | null;
     };
+    ArmorClassSpecial: {
+      /** Value */
+      value: number;
+      /** Special */
+      special?: string | null;
+    };
     /** Bloodline */
     Bloodline: {
       /** Name */
@@ -261,6 +267,7 @@ export interface components {
       /** Alignment */
       alignment: string;
       armor_class: components["schemas"]["ArmorClass"];
+      armor_class_special: components["schemas"]["ArmorClassSpecial"];
       hp: components["schemas"]["src__types__e5__Hitpoints"];
       speed: components["schemas"]["Speed"];
       stats: components["schemas"]["Stats"];
@@ -357,6 +364,7 @@ export interface components {
       /** Alignment */
       alignment: string;
       armor_class: components["schemas"]["ArmorClass"];
+      armor_class_special: components["schemas"]["ArmorClassSpecial"];
       hp: components["schemas"]["src__types__e5__Hitpoints"];
       speed: components["schemas"]["Speed"];
       stats: components["schemas"]["Stats"];
@@ -494,6 +502,7 @@ export interface components {
        */
       items?: string[];
       armor_class: components["schemas"]["ArmorClass"];
+      armor_class_special: components["schemas"]["ArmorClassSpecial"];
       saving_throws: components["schemas"]["src__types__pf__SavingThrows"];
       hp: components["schemas"]["src__types__pf__Hitpoints"];
       /**
@@ -561,6 +570,7 @@ export interface components {
        */
       items?: string[];
       armor_class: components["schemas"]["ArmorClass"];
+      armor_class_special: components["schemas"]["ArmorClassSpecial"];
       saving_throws: components["schemas"]["src__types__pf__SavingThrows"];
       hp: components["schemas"]["src__types__pf__Hitpoints"];
       /**

@@ -3,6 +3,7 @@ export type HpTrackerMetadata = {
     hp: number;
     maxHp: number;
     armorClass: number;
+    armorClassSpecial: number;
     hpTrackerActive: boolean;
     canPlayersSee: boolean;
     hpOnMap: boolean;
@@ -73,7 +74,7 @@ export type RoomMetadata = {
 };
 
 export type AttachmentMetadata = {
-    attachmentType: "BAR" | "AC" | "HP";
+    attachmentType: "BAR" | "AC" | "ACS" |"HP";
     isHpText: boolean;
 };
 
@@ -91,6 +92,12 @@ export type BarItemChanges = {
 };
 
 export type ACItemChanges = {
+    visible?: boolean;
+    text?: string;
+    position?: { x: number; y: number };
+};
+
+export type ACSItemChanges = {
     visible?: boolean;
     text?: string;
     position?: { x: number; y: number };

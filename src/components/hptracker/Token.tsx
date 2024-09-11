@@ -6,7 +6,7 @@ import { itemMetadataKey } from "../../helper/variables.ts";
 import { useCharSheet } from "../../context/CharacterContext.ts";
 import { updateHp } from "../../helper/hpHelpers.ts";
 import { dddiceRollToRollLog, evalString, getBgColor, getRoomDiceUser } from "../../helper/helpers.ts";
-import { updateAc } from "../../helper/acHelper.ts";
+import { updateAc, updateAcs } from "../../helper/acHelper.ts";
 import _ from "lodash";
 import { useMetadataContext } from "../../context/MetadataContext.ts";
 import { useComponentContext } from "../../context/ComponentContext.tsx";
@@ -61,6 +61,9 @@ export const Token = (props: TokenProps) => {
             if (data.armorClass < 0) {
                 changeArmorClass(0);
             }
+            if (data.armorClassSpecial < 0){
+                changeArmorClassSpecial(0);
+            }
         }
     }, [room?.allowNegativeNumbers]);
 
@@ -105,6 +108,16 @@ export const Token = (props: TokenProps) => {
         }
         const newData = { ...data, armorClass: newAc };
         updateAc(props.item, newData);
+        setData(newData);
+        handleValueChange(newData);
+    };
+
+    const changeArmorClassSpecial = (newAc: number) => {
+        if (!room?.allowNegativeNumbers) {
+            newAc = Math.max(newAc, 0);
+        }
+        const newData = { ...data, armorClassSpecial: newAc };
+        updateAcs(props.item, newData);
         setData(newData);
         handleValueChange(newData);
     };
@@ -369,6 +382,7 @@ export const Token = (props: TokenProps) => {
                             handleValueChange(newData);
                             updateHp(props.item, newData);
                             updateAc(props.item, newData);
+                            updateAcs(props.item, newData);
                         }}
                     />{" "}
                 </div>
@@ -474,6 +488,28 @@ export const Token = (props: TokenProps) => {
                             changeArmorClass(data.armorClass + 1);
                         } else if (e.key === "ArrowDown") {
                             changeArmorClass(data.armorClass - 1);
+                        }
+                    }}
+                />
+            </div>
+            <div className={"armor-class"}>
+                <input
+                    type={"text"}
+                    size={1}
+                    value={data.armorClassSpecial}
+                    onChange={(e) => {
+                        let factor = 1;
+                        if (room?.allowNegativeNumbers) {
+                            factor = e.target.value.startsWith("-") ? -1 : 1;
+                        }
+                        const value = Number(e.target.value.replace(/[^0-9]/g, ""));
+                        changeArmorClassSpecial(value * factor);
+                    }}
+                    onKeyDown={(e) => {
+                        if (e.key === "ArrowUp") {
+                            changeArmorClass(data.armorClassSpecial + 1);
+                        } else if (e.key === "ArrowDown") {
+                            changeArmorClass(data.armorClassSpecial - 1);
                         }
                     }}
                 />

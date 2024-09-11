@@ -245,6 +245,7 @@ export const updateTokenSheet = (
     bonus: number,
     hp: number,
     ac: number,
+    acs: number,
     characterId: string,
     ruleset: "e5" | "pf"
 ) => {
@@ -260,6 +261,7 @@ export const updateTokenSheet = (
                 ruleset: ruleset,
                 maxHp: newValues ? hp : data.hp,
                 armorClass: newValues ? ac : data.armorClass,
+                armorClassSpecial: newValues ? acs : data.armorClassSpecial
                 hp: newValues ? hp : data.hp,
                 stats: { ...data.stats, initiativeBonus: bonus, initial: false },
             };
@@ -310,6 +312,7 @@ export const getInitialValues = async (items: Array<Item>) => {
                                 statblock: {
                                     hp: statblock.hp.value,
                                     ac: statblock.armor_class.value,
+                                    acs: statblock.armor_class_special.value,
                                     bonus: Math.floor((statblock.stats.dexterity - 10) / 2),
                                     slug: statblock.slug,
                                     ruleset: "e5",
@@ -343,6 +346,7 @@ export const getInitialValues = async (items: Array<Item>) => {
                                 statblock: {
                                     hp: statblock.hp.value,
                                     ac: statblock.armor_class.value,
+                                    acs: statblock.armor_class_special.value,
                                     bonus: statblock.perception
                                         ? parseInt(statblock.perception)
                                         : statblock.skills && "perception" in statblock.skills

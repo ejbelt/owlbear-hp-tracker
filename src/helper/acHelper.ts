@@ -1,5 +1,5 @@
 import OBR, { buildCurve, buildText, Curve, Image, isCurve, isText, Item, Text } from "@owlbear-rodeo/sdk";
-import { ACItemChanges, HpTrackerMetadata } from "./types.ts";
+import { ACItemChanges, ACSItemChanges, HpTrackerMetadata } from "./types.ts";
 import { attachmentFilter, deleteAttachments, getACOffset, getAttachedItems, getImageBounds } from "./helpers.ts";
 import { itemMetadataKey, infoMetadataKey } from "./variables.ts";
 
@@ -108,7 +108,61 @@ export const updateAc = async (token: Item, data: HpTrackerMetadata) => {
     }
 };
 
+export const updateAcs = async (token: Item, data: HpTrackerMetadata) => {
+    const acsAttachment = (await getAttachedItems(token.id, ["CURVE"])).filter((a) => attachmentFilter(a, "ACS"));
+
+    const show = data.acOnMap && data.hpTrackerActive;
+    const visible = data.canPlayersSee && token.visible;
+    if (!show) {
+        await deleteAttachments(acsAttachment);
+    } else {
+        const characters = await OBR.scene.items.getItems([token.id]);
+        if (characters.length > 0) {
+            const character = characters[0];
+            const changes = new Map<string, ACItemChanges>();
+            await saveOrChangeAC(character, data, acsAttachment, changes, visible);
+            await updateAcChanges(changes);
+        }
+    }
+};
+
 export const updateAcChanges = async (changes: Map<string, ACItemChanges>) => {
+    if (changes.size > 0) {
+        await OBR.scene.items.updateItems(
+            (item): item is Curve => isCurve(item) && changes.has(item.id),
+            (curves) => {
+                curves.forEach((curve) => {
+                    if (changes.has(curve.id)) {
+                        const change = changes.get(curve.id);
+                        if (change) {
+                            if (change.visible !== undefined) {
+                                curve.visible = change.visible;
+                            }
+                            if (change.position) {
+                                curve.position = change.position;
+                            }
+                        }
+                    }
+                });
+            }
+        );
+        await OBR.scene.items.updateItems(
+            (item): item is Text => isText(item) && changes.has(item.id),
+            (texts) => {
+                texts.forEach((text) => {
+                    if (changes.has(text.id)) {
+                        const change = changes.get(text.id);
+                        if (change && change.text) {
+                            text.text.plainText = change.text;
+                        }
+                    }
+                });
+            }
+        );
+    }
+};
+
+export const updateAcsChanges = async (changes: Map<string, ACSItemChanges>) => {
     if (changes.size > 0) {
         await OBR.scene.items.updateItems(
             (item): item is Curve => isCurve(item) && changes.has(item.id),
@@ -177,6 +231,39 @@ export const saveOrChangeAC = async (
     }
 };
 
+export const saveOrChangeACS = async (
+    character: Item,
+    data: HpTrackerMetadata,
+    attachments: Item[],
+    changeMap: Map<string, ACItemChanges>,
+    visible: boolean
+) => {
+    if (attachments.length > 0) {
+        for (const a of attachments) {
+            if (a.visible !== visible) {
+                const change = changeMap.get(a.id) ?? {};
+                change.visible = visible;
+                changeMap.set(a.id, change);
+            }
+            const texts = await getAttachedItems(a.id, ["TEXT"]);
+            texts.forEach((text) => {
+                if (text.type === "TEXT") {
+                    const t = text as Text;
+                    if (t.text.plainText !== data.armorClassSpecial.toString()) {
+                        const textChange = changeMap.get(t.id) ?? {};
+                        textChange.text = data.armorClassSpecial.toString();
+                        changeMap.set(t.id, textChange);
+                    }
+                }
+            });
+        }
+    } else {
+        const ac = await createAC(data.armorClassSpecial, character as Image);
+        ac.forEach((item) => (item.visible = visible));
+        await OBR.scene.items.addItems(ac);
+    }
+};
+
 export const updateAcVisibility = async (tokens: Array<Item>) => {
     const acChanges = new Map<string, ACItemChanges>();
     for (const token of tokens) {
@@ -192,4 +279,21 @@ export const updateAcVisibility = async (tokens: Array<Item>) => {
         });
     }
     await updateAcChanges(acChanges);
+};
+
+export const updateAcsVisibility = async (tokens: Array<Item>) => {
+    const acChanges = new Map<string, ACSItemChanges>();
+    for (const token of tokens) {
+        const acsAttachments = (await getAttachedItems(token.id, ["CURVE"])).filter((a) => attachmentFilter(a, "ACS"));
+        const data = token.metadata[itemMetadataKey] as HpTrackerMetadata;
+
+        acsAttachments.forEach((curve) => {
+            const change = acChanges.get(curve.id) ?? {};
+            if (curve.visible != (token.visible && data.canPlayersSee)) {
+                change.visible = token.visible && data.canPlayersSee;
+                acChanges.set(curve.id, change);
+            }
+        });
+    }
+    await updateAcsChanges(acChanges);
 };
