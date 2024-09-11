@@ -5,9 +5,9 @@
 
     .player-wrapper {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         justify-items: flex-start;
-        gap: 10px;
+        gap: 4px;
         border-bottom: 1px solid white;
         padding: 5px 5px 1px;
 
@@ -15,18 +15,18 @@
             cursor: pointer;
 
             &:hover {
-                font-weight: 800;
+                font-weight: 600;
             }
         }
 
         .current-hp {
             display: flex;
-            gap: 5px;
+            gap: 4px;
         }
 
         .armor-class {
             display: flex;
-            gap: 5px;
+            gap: 4px;
         }
 
         .armor-class-special {
