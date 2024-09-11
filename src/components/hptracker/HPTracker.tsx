@@ -352,7 +352,7 @@ const Player = (props: PlayerProps) => {
                 </div>
             )}
         </div>
-
+            
         </div>
     ) : (
         <></>
