@@ -1,16 +1,17 @@
 {
-    "name": "Dungeon Master - HP Tracker",
-    "version": "1.0.3",
+    "name": "HP Tracker - PMD Edition",
+    "version": "2.3.1",
     "manifest_version": 1,
-    "author": "Joshua Hercher",
-    "description": "A tool to keep track of N/PC HP. With visibility for players can be toggled for each token.",
+    "author": "Joshua Hercher (Modified by ResRaptor)",
+    "description": "Modified hitpoint tracker for PMDND",
     "icon": "/icon.svg",
+    "homepage_url": "https://github.com/ejbelt/owlbear-hp-tracker",
     "action": {
         "title": "HP Tracker",
         "icon": "/icon.svg",
         "popover": "/",
-        "height": 600,
-        "width": 400
+        "height": 40,
+        "width": 40
     },
     "background_url": "/background.html"
 }

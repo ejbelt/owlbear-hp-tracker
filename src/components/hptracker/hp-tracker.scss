@@ -1,11 +1,11 @@
 .hp-tracker {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 2px;
 
     .player-wrapper {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         justify-items: flex-start;
         gap: 10px;
         border-bottom: 1px solid white;
@@ -21,12 +21,20 @@
 
         .current-hp {
             display: flex;
+<<<<<<< HEAD
             gap: 6px;
         }
 
         .armor-class {
             display: flex;
             gap: 6px;
+=======
+            gap: 5px;
+        }
+
+        .armor-class {
+            justify-self: flex-end;
+>>>>>>> feature/performance
         }
 
         .armor-class-special {
@@ -34,7 +42,6 @@
         }
 
         input[type="number"] {
-            display: flex;
             border: none;
             background-color: transparent;
             width: 40px;
