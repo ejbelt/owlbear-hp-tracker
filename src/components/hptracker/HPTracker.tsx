@@ -3,7 +3,7 @@ import { ContextWrapper } from "../ContextWrapper.tsx";
 import { usePlayerContext } from "../../context/PlayerContext.ts";
 import OBR, { Item, Metadata } from "@owlbear-rodeo/sdk";
 import { characterMetadata } from "../../helper/variables.ts";
-import { HpTrackerMetadata } from "../../helper/types.ts";
+import { HpTrackerMetadata, SceneMetadata } from "../../helper/types.ts";
 import "./hp-tracker.scss";
 
 type PlayerProps = {

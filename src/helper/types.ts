@@ -12,6 +12,20 @@ export type HpTrackerMetadata = {
     initiative: number;
 };
 
+export type SceneMetadata = {
+    version: string;
+    id: string;
+    allowNegativeNumbers?: boolean;
+    hpBarSegments?: number;
+    hpBarOffset?: number;
+    acOffset?: { x: number; y: number };
+    acShield?: boolean;
+    ruleset?: Ruleset;
+    groups?: Array<string>;
+    openChangeLog?: boolean;
+    playerSort: boolean;
+};
+
 export type HpTextMetadata = {
     isHpText: boolean;
 };
