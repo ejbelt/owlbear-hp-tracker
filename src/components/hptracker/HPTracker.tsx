@@ -118,8 +118,6 @@ const Player = (props: PlayerProps) => {
                         handleTMPHpChange(Number(e.target.value));
                     }}
                 />
-                <span>/</span>
-                <span>{props.data.maxHp}</span>
             </span>
             <span className={"armor-class"}>ACP: 
                 <input
