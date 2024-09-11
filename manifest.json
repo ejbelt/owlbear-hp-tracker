@@ -1,0 +1,17 @@
+{
+    "name": "HP Tracker - PMD Edition",
+    "version": "2.3.1",
+    "manifest_version": 1,
+    "author": "Joshua Hercher (Modified by ResRaptor)",
+    "description": "Modified hitpoint tracker for PMDND",
+    "icon": "/icon.svg",
+    "homepage_url": "https://github.com/ejbelt/owlbear-hp-tracker",
+    "action": {
+        "title": "HP Tracker",
+        "icon": "/icon.svg",
+        "popover": "/",
+        "height": 40,
+        "width": 40
+    },
+    "background_url": "/background.html"
+}
