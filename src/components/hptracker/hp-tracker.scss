@@ -5,17 +5,17 @@
 
     .player-wrapper {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         justify-items: flex-start;
-        gap: 14px;
+        gap: 10px;
         border-bottom: 1px solid white;
-        padding: 8px 8px 1px;
+        padding: 5px 5px 1px;
 
         .player-name {
             cursor: pointer;
 
             &:hover {
-                font-weight: 600;
+                font-weight: 800;
             }
         }
 
@@ -25,8 +25,7 @@
         }
 
         .armor-class {
-            display: flex;
-            gap: 5px;
+            justify-self: flex-end;
         }
 
         .armor-class-special {
@@ -35,7 +34,6 @@
 
         input[type="number"] {
             border: none;
-            display: flex;
             background-color: transparent;
             width: 40px;
             color: rgba(255, 255, 255, 0.87);
