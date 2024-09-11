@@ -24,6 +24,7 @@ const Player = (props: PlayerProps) => {
     const [hp, setHp] = useState<number>(props.data.hp);
     const [maxHp, setMaxHp] = useState<number>(props.data.maxHp);
     const [armorClass, setArmorClass] = useState<number>(props.data.armorClass);
+    const [armorClassSpecial, setArmorClassSpecial] = useState<number>(props.data.armorClassSpecial);
     const [hpMode, setHpMode] = useState<HPMode>(props.data.hpMode);
     const [hpOnMap, setHpOnMap] = useState<boolean>(props.data.hpOnMap);
     const [acOnMap, setAcOnMap] = useState<boolean>(props.data.acOnMap);
@@ -54,6 +55,9 @@ const Player = (props: PlayerProps) => {
                 } else if (key === "armorClass") {
                     currentData.armorClass = Math.max(Number(value), 0);
                     setArmorClass(currentData.armorClass);
+                } else if (key === "armorClassSpecial") {
+                    currentData.armorClassSpecial = Math.max(Number(value), 0);
+                    setArmorClass(currentData.armorClassSpecial);
                 } else if (key === "maxHP") {
                     currentData.maxHp = Math.max(Number(value), 0);
                     if (currentData.maxHp < currentData.hp) {
@@ -276,6 +280,45 @@ const Player = (props: PlayerProps) => {
                             handleValueChange(armorClass - 1, "armorClass");
                         } else if (e.movementY < 0) {
                             handleValueChange(armorClass + 1, "armorClass");
+                        }
+                    }
+                }}
+                className={"armor-class"}
+            />
+            <input
+                type={"text"}
+                size={1}
+                value={armorClassSpecial}
+                onChange={(e) => {
+                    const value = Number(e.target.value.replace(/[^0-9]/g, ""));
+                    handleValueChange(value, "armorClassSpecial");
+                }}
+                onKeyDown={(e) => {
+                    if (e.key === "ArrowUp") {
+                        handleValueChange(armorClassSpecial + 1, "armorClassSpecial");
+                    } else if (e.key === "ArrowDown") {
+                        handleValueChange(armorClassSpecial - 1, "armorClassSpecial");
+                    }
+                }}
+                onWheel={(e) => {
+                    if (e.deltaY > 0) {
+                        handleValueChange(armorClassSpecial - 1, "armorClassSpecial");
+                    } else if (e.deltaY < 0) {
+                        handleValueChange(armorClassSpecial + 1, "armorClassSpecial");
+                    }
+                }}
+                onMouseDown={() => {
+                    setMouseDown(true);
+                }}
+                onMouseUp={() => {
+                    setMouseDown(false);
+                }}
+                onMouseMove={(e) => {
+                    if (mouseDown) {
+                        if (e.movementY > 0) {
+                            handleValueChange(armorClassSpecial - 1, "armorClassSpecial");
+                        } else if (e.movementY < 0) {
+                            handleValueChange(armorClassSpecial + 1, "armorClassSpecial");
                         }
                     }
                 }}
