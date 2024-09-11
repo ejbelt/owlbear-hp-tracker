@@ -26,6 +26,7 @@ const Player = (props: PlayerProps) => {
             items.forEach((item) => {
                 const currentData: HpTrackerMetadata = item.metadata[characterMetadata] as HpTrackerMetadata;
                 currentData.hp = value;
+                currentData.hp += currentData.temp_hp
                 // just assigning currentData did not trigger onChange event. Spreading helps
                 item.metadata[characterMetadata] = { ...currentData };
             });
