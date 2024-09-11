@@ -234,7 +234,7 @@ export const Token = (props: TokenProps) => {
             return "#242424";
         }
 
-        const percent = props.data.hp / props.data.maxHp;
+        const percent = props.data.hp / props.data.maxHp+data.tempHp;
 
         const g = 255 * percent;
         const r = 255 - 255 * percent;
@@ -254,6 +254,8 @@ export const Token = (props: TokenProps) => {
         }
         let hp = 0;
         if (data.maxHp > 0) {
+            console.log("New HP")
+            console.log(data.tempHp)
             hp = Math.min(Number(value * factor), data.maxHp+data.tempHp);
         } else {
             hp = Number(value * factor);
@@ -350,14 +352,20 @@ export const Token = (props: TokenProps) => {
                     }}
                     onKeyDown={(e) => {
                         if (e.key === "ArrowUp") {
+                            console.log("ArrowUp")
+                            console.log(data.tempHp)
                             const hp = Math.min(data.hp + 1, data.maxHp+data.tempHp);
                             handleValueChange(hp, "hp");
                             e.currentTarget.value = hp.toString();
                         } else if (e.key === "ArrowDown") {
+                            console.log("ArrowUp")
+                            console.log(data.tempHp)
                             const hp = Math.min(data.hp - 1, data.maxHp+data.tempHp);
                             handleValueChange(hp, "hp");
                             e.currentTarget.value = hp.toString();
                         } else if (e.key === "Enter") {
+                            console.log("ArrowUp")
+                            console.log(data.tempHp)
                             const input = e.currentTarget.value;
                             const hp = getNewHpValue(input);
                             if (hp !== null) {
