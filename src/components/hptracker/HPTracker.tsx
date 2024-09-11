@@ -66,24 +66,41 @@ const Player = (props: PlayerProps) => {
         });
     };
 
-    const handleOnPlayerClick = (event: MouseEvent) => {
-        OBR.scene.items.updateItems([props.id], (items) => {
-            items.forEach((item) => {
-                if (event.type === "mousedown") {
-                    item.rotation = 10;
-                } else {
-                    item.rotation = 0;
-                }
-            });
+    const handleOnPlayerClick = async (e: React.MouseEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const currentSelection = (await OBR.player.getSelection()) || [];
+        if (currentSelection.includes(props.item.id)) {
+            currentSelection.splice(currentSelection.indexOf(props.item.id), 1);
+            await OBR.player.select(currentSelection);
+        } else {
+            if (e.metaKey || e.ctrlKey || e.shiftKey) {
+                currentSelection.push(props.item.id);
+                await OBR.player.select(currentSelection);
+            } else {
+                await OBR.player.select([props.item.id]);
+            }
+        }
+    };
+
+    const handleOnPlayerDoubleClick = async () => {
+        const bounds = await OBR.scene.items.getItemBounds([props.item.id]);
+        await OBR.player.select([props.item.id]);
+        await OBR.viewport.animateToBounds({
+            ...bounds,
+            min: { x: bounds.min.x - 1000, y: bounds.min.y - 1000 },
+            max: { x: bounds.max.x + 1000, y: bounds.max.y + 1000 },
         });
     };
 
     const display = (): boolean => {
         return (
             props.data.hpTrackerActive &&
-            (playerContext.role === "GM" || (playerContext.role === "PLAYER" && props.data.canPlayersSee))
+            (playerContext.role === "GM" ||
+                (playerContext.role === "PLAYER" && props.data.canPlayersSee && props.item.visible))
         );
     };
+
 
     return display() ? (
         <div className={"player-wrapper"}>
@@ -141,6 +158,39 @@ const Player = (props: PlayerProps) => {
                     }}
                 />
             </span>
+            <div className={"initiative-wrapper"}>
+                <input
+                    type={"text"}
+                    size={1}
+                    value={data.initiative}
+                    onChange={(e) => {
+                        const value = Number(e.target.value.replace(/[^0-9]/g, ""));
+                        const newData = { ...data, initiative: value };
+                        setData(newData);
+                        handleValueChange(newData);
+                    }}
+                    className={"initiative"}
+                />
+                <button
+                    title={"Roll Initiative (including DEX modifier from statblock)"}
+                    className={`toggle-button initiative-button`}
+                    onClick={() => {
+                        const value = Math.floor(Math.random() * 20) + 1 + data.stats.initiativeBonus;
+                        const newData = { ...data, initiative: value };
+                        setData(newData);
+                        handleValueChange(newData);
+                    }}
+                />
+            </div>
+            {props.popover ? null : (
+                <div className={"info-button-wrapper"}>
+                    <button
+                        title={"Show Statblock"}
+                        className={"toggle-button info-button"}
+                        onClick={() => setId(props.item.id)}
+                    />
+                </div>
+            )}
         </div>
     ) : (
         <></>
