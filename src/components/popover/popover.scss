@@ -50,7 +50,18 @@
 
                     &::before {
                         display: block;
-                        content: "AC: ";
+                        content: "ACP: ";
+                    }
+                }
+
+                .armor-class-special {
+                    align-items: center;
+                    order: 3;
+                    min-width: unset;
+
+                    &::before {
+                        display: block;
+                        content: "ACS: ";
                     }
                 }
 
