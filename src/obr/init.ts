@@ -24,6 +24,7 @@ const initItems = async () => {
                     name: item.name,
                     hp: 0,
                     maxHp: 0,
+                    tempHp: 0,
                     armorClass: 0,
                     armorClassSpecial: 0,
                     hpTrackerActive: false,
