@@ -1,12 +1,14 @@
 export type HpTrackerMetadata = {
     name: string;
     hp: number;
+    temp_hp: number;
     maxHp: number;
     armorClass: number;
     armorClassSpecial: number;
     hpTrackerActive: boolean;
     canPlayersSee: boolean;
     hpOnMap: boolean;
+    index: number;
 };
 
 export type HpTextMetadata = {

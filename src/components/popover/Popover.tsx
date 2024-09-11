@@ -24,12 +24,14 @@ const Layer = () => {
     const id = new URLSearchParams(window.location.search).get("id") ?? null;
     const [hp, setHp] = useState<number>(0);
     const [maxHp, setMaxHp] = useState<number>(0);
+    const [temp_hp, setTempHp] = useState<number>(0);
     const [armorClass, setArmorClass] = useState<number>(0);
     const [armorClassSpecial, setArmorClassSpecial] = useState<number>(0);
     const [name, setName] = useState<string>("");
     const [hpTrackerActive, setHpTrackerActive] = useState<boolean>(false);
     const [canPlayersSee, setCanPlayersSee] = useState<boolean>(false);
     const [hpOnMap, setHpOnMap] = useState<boolean>(false);
+    const [index, setIndex] = useState<number>(0);
 
     useEffect(() => {
         if (id) {
@@ -39,11 +41,13 @@ const Layer = () => {
                         name: name,
                         maxHp: maxHp,
                         hp: hp,
+                        tmp_hp: tmp_hp,
                         armorClass: armorClass,
                         armorClassSpecial: armorClassSpecial,
                         hpTrackerActive: hpTrackerActive,
                         canPlayersSee: canPlayersSee,
                         hpOnMap: hpOnMap,
+                        index: index
                     };
                     item.metadata[characterMetadata] = {
                         ...data,
@@ -63,23 +67,27 @@ const Layer = () => {
                         name: item.name,
                         hp: 0,
                         maxHp: 0,
+                        tmp_hp: 0,
                         armorClass: 0,
                         armorClassSpecial: 0,
                         hpTrackerActive: false,
                         canPlayersSee: false,
                         hpOnMap: false,
+                        index: 0
                     };
                     if (characterMetadata in item.metadata) {
                         data = item.metadata[characterMetadata] as HpTrackerMetadata;
                     }
                     setName(data.name !== "" ? data.name : item.name);
                     setHp(data.hp ?? 0);
+                    setTempHp(data.temp_hp ?? 0);
                     setArmorClass(data.armorClass ?? 0);
                     setArmorClassSpecial(data.armorClassSpecial ?? 0);
                     setMaxHp(data.maxHp ?? 0);
                     setHpTrackerActive(data.hpTrackerActive ?? false);
                     setCanPlayersSee(data.canPlayersSee ?? false);
                     setHpOnMap(data.hpOnMap ?? false);
+                    setIndex(data.index ?? 0);
                 }
             };
             initTokens();
