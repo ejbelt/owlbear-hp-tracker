@@ -16,6 +16,7 @@ export type SearchResult = {
     armor_class_special: number;
     armor_desc: string;
     hit_points: number;
+    tempHp: number;
     hit_dice: string;
     speed: {
         walk: number;

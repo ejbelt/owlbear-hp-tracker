@@ -15,7 +15,7 @@ export const Open5eSheet = ({ slug }: { slug: string }) => {
 
     const specialAbillities = data && typeof data.special_abilities !== "string" ? data.special_abilities : [];
 
-    const updateValues = (maxHp: number, ac: number, acs: number) => {
+    const updateValues = (maxHp: number, ac: number, acs: number, tempHp: number) => {
         if (characterId) {
             OBR.scene.items.updateItems([characterId], (items) => {
                 items.forEach((item) => {
@@ -37,7 +37,7 @@ export const Open5eSheet = ({ slug }: { slug: string }) => {
 
     useEffect(() => {
         if (monsterQuery.isSuccess && data) {
-            updateValues(data.hit_points, data.armor_class, data.armor_class_special);
+            updateValues(data.hit_points, data.armor_class, data.armor_class_special, data.tempHp);
         }
     }, [monsterQuery.isSuccess]);
 
