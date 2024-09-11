@@ -36,13 +36,8 @@ const Player = (props: PlayerProps) => {
         OBR.scene.items.updateItems([props.id], (items) => {
             items.forEach((item) => {
                 const currentData: HpTrackerMetadata = item.metadata[characterMetadata] as HpTrackerMetadata;
-                if (value > currentData.temp_hp) {
-                    currentData.temp_hp = value;
-                    currentData.hp = ((currentData.hp)-(value-1)) +value;
-                } else {
-                    currentData.temp_hp = value;
-                    currentData.hp = ((currentData.hp)+(value-1)) - value;
-                }
+                currentData.temp_hp = value;
+                currentData.hp = currentData.hp + value;
                 // just assigning currentData did not trigger onChange event. Spreading helps
                 item.metadata[characterMetadata] = { ...currentData };
             });
