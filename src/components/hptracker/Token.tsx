@@ -489,15 +489,6 @@ export const Token = (props: TokenProps) => {
                     }}
                 />
             </div>
-            {props.popover ? null : (
-                <div className={"info-button-wrapper"}>
-                    <button
-                        title={"Show Statblock"}
-                        className={"toggle-button info-button"}
-                        onClick={() => setId(props.item.id)}
-                    />
-                </div>
-            )}
         </div>
     ) : props.data.hpBar && props.item.visible ? (
         <div
