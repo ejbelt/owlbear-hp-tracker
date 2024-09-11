@@ -93,6 +93,7 @@ body:has(.popover-app) {
                 grid-template-areas:
                     "hp temp"
                     "ac init"
+                    "acs init"
                     "settings settings";
                 column-gap: 1ch;
                 row-gap: 2px;
@@ -132,7 +133,19 @@ body:has(.popover-app) {
                     &::before {
                         display: block;
                         min-width: 26px;
-                        content: "AC: ";
+                        content: "ACP: ";
+                    }
+                }
+
+                .armor-class-special {
+                    grid-area: ac;
+                    align-items: center;
+                    min-width: unset;
+
+                    &::before {
+                        display: block;
+                        min-width: 26px;
+                        content: "ACS: ";
                     }
                 }
 

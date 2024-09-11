@@ -53,6 +53,21 @@
                 border-bottom: none;
             }
         }
+
+        &.acs {
+            display: flex;
+            flex-direction: column;
+
+            .ac-position {
+                display: flex;
+                align-items: center;
+                gap: 2px;
+            }
+
+            .ac-shield {
+                border-bottom: none;
+            }
+        }
     }
 
     .ruleset {
