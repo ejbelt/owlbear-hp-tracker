@@ -25,7 +25,7 @@ const Player = (props: PlayerProps) => {
         OBR.scene.items.updateItems([props.id], (items) => {
             items.forEach((item) => {
                 const currentData: HpTrackerMetadata = item.metadata[characterMetadata] as HpTrackerMetadata;
-                currentData.hp += value;
+                currentData.hp = value;
                 // just assigning currentData did not trigger onChange event. Spreading helps
                 item.metadata[characterMetadata] = { ...currentData };
             });
@@ -84,11 +84,16 @@ const Player = (props: PlayerProps) => {
                 {props.data.name}
             </div>
             <span className={"current-hp"}>
-                <span>{props.data.hp}</span>
+                <input
+                    type={"number"}
+                    value={props.data.hp}
+                    min={0}
+                    onChange={(e) => {
+                        handleHpChange(Number(e.target.value));
+                    }}
+                />
                 <span>/</span>
                 <span>{props.data.maxHp}</span>
-                <button className={"hp-change minus"} onClick={() => handleHpChange(-1)}></button>
-                <button className={"hp-change plus"} onClick={() => handleHpChange(1)}></button>
             </span>
             <span className={"armor-class"}>ACP: 
                 <input
