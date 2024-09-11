@@ -131,6 +131,7 @@ export const saveOrChangeText = async (
 
                 change.text =
                     (data.hpOnMap ? `HP:${data.hp}/${data.maxHp}` : "") +
+                    (data.hpOnMap ? `Temp HP:${data.tempHp}` : "") +
                     (data.hpOnMap && data.acOnMap ? " " : "") +
                     (data.acOnMap ? `ACP:${data.armorClass}` : "");
                     (data.acOnMap ? `ACS:${data.armorClassSpecial}` : "");
@@ -141,6 +142,7 @@ export const saveOrChangeText = async (
     } else {
         const textContent =
             (data.hpOnMap ? `HP:${data.hp}/${data.maxHp}` : "") +
+            (data.hpOnMap ? `Temp HP:${data.tempHp}` : "") +
             (data.hpOnMap && data.acOnMap ? " " : "") +
             (data.acOnMap ? `ACP:${data.armorClass}` : "");
             (data.acOnMap ? `ACS:${data.armorClassSpecial}` : "");

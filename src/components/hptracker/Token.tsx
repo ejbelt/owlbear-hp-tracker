@@ -384,27 +384,27 @@ export const Token = (props: TokenProps) => {
                     defaultValue={data.tempHp}
                     onBlur={(e) => {
                         const input = e.target.value;
-                        const hp = getNewHpValue(input);
-                        if (hp !== null) {
-                            e.target.value = hp.toString();
-                            handleValueChange(hp, "tempHp");
+                        const tempHp = getNewHpValue(input);
+                        if (tempHp !== null) {
+                            e.target.value = tempHp.toString();
+                            handleValueChange(tempHp, "tempHp");
                         }
                     }}
                     onKeyDown={(e) => {
                         if (e.key === "ArrowUp") {
-                            const hp = Math.max(data.tempHp + 1, 0);
-                            handleValueChange(hp, "tempHp");
-                            e.currentTarget.value = hp.toString();
+                            const tempHp = Math.max(data.tempHp + 1, 0);
+                            handleValueChange(tempHp, "tempHp");
+                            e.currentTarget.value = tempHp.toString();
                         } else if (e.key === "ArrowDown") {
-                            const hp = Math.max(data.tempHp - 1, 0);
-                            handleValueChange(hp, "tempHp");
-                            e.currentTarget.value = hp.toString();
+                            const tempHp = Math.max(data.tempHp - 1, 0);
+                            handleValueChange(tempHp, "tempHp");
+                            e.currentTarget.value = tempHp.toString();
                         } else if (e.key === "Enter") {
                             const input = e.currentTarget.value;
-                            const hp = getNewHpValue(input);
-                            if (hp !== null) {
-                                e.currentTarget.value = hp.toString();
-                                handleValueChange(hp, "tempHp");
+                            const tempHp = getNewHpValue(input);
+                            if (tempHp !== null) {
+                                e.currentTarget.value = tempHp.toString();
+                                handleValueChange(tempHp, "tempHp");
                             }
                         }
                     }}

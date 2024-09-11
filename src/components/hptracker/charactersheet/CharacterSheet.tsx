@@ -20,10 +20,11 @@ export const Open5eSheet = ({ slug }: { slug: string }) => {
             OBR.scene.items.updateItems([characterId], (items) => {
                 items.forEach((item) => {
                     const data = item.metadata[characterMetadata] as HpTrackerMetadata;
-                    if (data.hp === 0 && data.maxHp === 0 && data.armorClass === 0 && data.armorClassSpecial === 0) {
+                    if (data.hp === 0 && data.maxHp === 0 && data.armorClass === 0 && data.armorClassSpecial === 0 && data.tempHp === 0) {
                         item.metadata[characterMetadata] = {
                             ...data,
                             maxHp: maxHp,
+                            tempHp: tempHp,
                             armorClass: ac,
                             armorClassSpecial: acs,
                             hp: maxHp,
