@@ -38,10 +38,10 @@ const Player = (props: PlayerProps) => {
                 const currentData: HpTrackerMetadata = item.metadata[characterMetadata] as HpTrackerMetadata;
                 if (value > currentData.temp_hp) {
                     currentData.temp_hp = value;
-                    currentData.hp = ((currentData.hp)-(value-1)) - currentData.maxHp) + currentData.maxHp+value;
+                    currentData.hp = ((currentData.hp)-(value-1))) +value;
                 } else {
                     currentData.temp_hp = value;
-                    currentData.hp = ((currentData.hp)+(value-1)) - currentData.maxHp) + currentData.maxHp-value;
+                    currentData.hp = ((currentData.hp)+(value-1))) - value;
                 }
                 // just assigning currentData did not trigger onChange event. Spreading helps
                 item.metadata[characterMetadata] = { ...currentData };
