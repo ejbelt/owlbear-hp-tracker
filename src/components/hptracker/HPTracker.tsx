@@ -36,7 +36,7 @@ const Player = (props: PlayerProps) => {
         OBR.scene.items.updateItems([props.id], (items) => {
             items.forEach((item) => {
                 const currentData: HpTrackerMetadata = item.metadata[characterMetadata] as HpTrackerMetadata;
-                currentData.armorClass += value;
+                currentData.armorClass = value;
                 // just assigning currentData did not trigger onChange event. Spreading helps
                 item.metadata[characterMetadata] = { ...currentData };
             });
@@ -47,7 +47,7 @@ const Player = (props: PlayerProps) => {
         OBR.scene.items.updateItems([props.id], (items) => {
             items.forEach((item) => {
                 const currentData: HpTrackerMetadata = item.metadata[characterMetadata] as HpTrackerMetadata;
-                currentData.armorClassSpecial += value;
+                currentData.armorClassSpecial = value;
                 // just assigning currentData did not trigger onChange event. Spreading helps
                 item.metadata[characterMetadata] = { ...currentData };
             });
@@ -96,7 +96,7 @@ const Player = (props: PlayerProps) => {
                     value={props.data.armorClass}
                     min={0}
                     onChange={(e) => {
-                        setArmorClass(Number(e.target.value));
+                        handleACChange(Number(e.target.value));
                     }}
                 />
             </span>
@@ -106,7 +106,7 @@ const Player = (props: PlayerProps) => {
                     value={props.data.armorClassSpecial}
                     min={0}
                     onChange={(e) => {
-                        setArmorClassSpecial(Number(e.target.value));
+                        handleACSChange(Number(e.target.value));
                     }}
                 />
             </span>
