@@ -159,17 +159,19 @@ export const Token = (props: TokenProps) => {
                             updateHpBar(data.hpBar, props.item.id, { ...data, hp: temp_value });
                             updateText(data.hpOnMap || data.acOnMap, data.canPlayersSee && props.item.visible, props.item.id, {
                                 ...data,
-                                tempHp: currentData.tempHp,
                                 hp: currentData.hp,
                             });
                         } else {
                             currentData.tempHp = allowNegativNumbers ? Number(value) : Math.max(Number(value), 0);
                             updateText(data.hpOnMap || data.acOnMap, data.canPlayersSee && props.item.visible, props.item.id, {
                                 ...data,
-                                tempHp: currentData.tempHp,
                                 hp: currentData.hp,
                             });
                         }
+                        updateText(data.hpOnMap || data.acOnMap, data.canPlayersSee && props.item.visible, props.item.id, {
+                            ...data,
+                            tempHp: currentData.tempHp,
+                        });
                         setData({ ...data, tempHp: currentData.tempHp });
                 } else if (key === "initiative") {
                     currentData.initiative = Number(value);
