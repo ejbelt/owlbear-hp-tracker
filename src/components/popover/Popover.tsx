@@ -93,6 +93,7 @@ const Layer = () => {
                 <input
                     type={"text"}
                     value={name}
+                    placeholder="Smitty Werbenjagermanjensen"
                     onChange={(e) => {
                         setName(e.target.value);
                     }}
@@ -104,6 +105,7 @@ const Layer = () => {
                     type={"number"}
                     value={maxHp}
                     min={0}
+                    placeholder="0"
                     onChange={(e) => {
                         setMaxHp(Number(e.target.value));
                     }}
@@ -116,6 +118,7 @@ const Layer = () => {
                     value={hp}
                     max={maxHp}
                     min={0}
+                    placeholder="0"
                     onChange={(e) => {
                         setHp(Number(e.target.value));
                     }}
@@ -127,6 +130,7 @@ const Layer = () => {
                     type={"number"}
                     value={armorClass}
                     min={0}
+                    placeholder="0"
                     onChange={(e) => {
                         setArmorClass(Number(e.target.value));
                     }}
@@ -138,6 +142,7 @@ const Layer = () => {
                     type={"number"}
                     value={armorClassSpecial}
                     min={0}
+                    placeholder="0"
                     onChange={(e) => {
                         setArmorClassSpecial(Number(e.target.value));
                     }}
