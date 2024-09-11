@@ -1,13 +1,13 @@
 .hp-tracker {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 5px;
 
     .player-wrapper {
         display: grid;
-        grid-template-columns: repeat(6, 1fr);
+        grid-template-columns: repeat(5, 1fr);
         justify-items: flex-start;
-        gap: 22px;
+        gap: 18px;
         border-bottom: 1px solid white;
         padding: 8px 8px 2px;
 
