@@ -24,7 +24,7 @@ import {
 } from "../helper/hpHelpers.ts";
 import { v4 as uuidv4 } from "uuid";
 import { migrateTo140 } from "../migrations/v140.ts";
-import { saveOrChangeAC, updateAc, updateAcChanges, updateAcVisibility, updateAcsVisibility, updateAcsChanges, updateAcs } from "../helper/acHelper.ts";
+import { saveOrChangeAC, updateAc, updateAcChanges, updateAcVisibility, updateAcsVisibility, updateAcsChanges, updateAcs, saveOrChangeACS } from "../helper/acHelper.ts";
 import { migrateTo141 } from "../migrations/v141.ts";
 import { attachmentFilter, getAttachedItems, getInitialValues } from "../helper/helpers.ts";
 import { migrateTo160 } from "../migrations/v160.ts";
@@ -60,11 +60,12 @@ const initItems = async () => {
         }
         if (data.acOnMap) {
             await saveOrChangeAC(token, data, acAttachments, acChanges, token.visible && data.canPlayersSee);
-            await saveOrChangeACS(token, data, acAttachments, acsChanges, token.visible && data.canPlayersSee);
+            await saveOrChangeACS(token, data, acsAttachments, acsChanges, token.visible && data.canPlayersSee);
         }
     }
 
     await updateAcChanges(acChanges);
+    await updateAcsChanges(acsChanges);
     await updateBarChanges(barChanges);
     await updateTextChanges(textChanges);
     console.info("HP Tracker - Token initialization done");
@@ -257,6 +258,7 @@ const setupContextMenu = async () => {
                     const metadata = token.metadata[itemMetadataKey] as HpTrackerMetadata;
                     updateHp(token, metadata);
                     updateAc(token, metadata);
+                    updateAcs(token, metadata);
                 }
             });
         },

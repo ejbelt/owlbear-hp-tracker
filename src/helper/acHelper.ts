@@ -363,5 +363,5 @@ export const updateAcsVisibility = async (tokens: Array<Item>) => {
             }
         });
     }
-    await updateAcsChanges(acChanges);
+    await updateAcsChanges(acsChanges);
 };

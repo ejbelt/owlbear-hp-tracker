@@ -29,6 +29,15 @@ export const getACOffset = async (height: number, width: number) => {
     return offset;
 };
 
+export const getACSOffset = async (height: number, width: number) => {
+    const metadata = (await OBR.room.getMetadata()) as Metadata;
+    const roomMetadata = metadata[metadataKey] as RoomMetadata;
+    let offset = roomMetadata ? roomMetadata.acsOffset ?? { x: 0, y: 0 } : { x: 0, y: 0 };
+    offset.x = offset.x * (width / 150);
+    offset.y = offset.y * (height / 150);
+    return offset;
+};
+
 export const getAttachedItems = async (id: string, itemTypes: Array<string>) => {
     const items = await OBR.scene.items.getItemAttachments([id]);
     // why am I not using .filter()? because if I do there is a bug and I can't find it
@@ -141,7 +150,7 @@ export const getDamage = (text: string) => {
     return dice && dice.length > 0 ? dice[0] : null;
 };
 
-export const attachmentFilter = (attachment: Item, attachmentType: "BAR" | "HP" | "AC") => {
+export const attachmentFilter = (attachment: Item, attachmentType: "BAR" | "HP" | "AC" | "ACS") => {
     if (infoMetadataKey in attachment.metadata) {
         const metadata = attachment.metadata[infoMetadataKey] as AttachmentMetadata;
         return metadata.isHpText && metadata.attachmentType === attachmentType;
