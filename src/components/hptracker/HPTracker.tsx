@@ -86,6 +86,7 @@ const Player = (props: PlayerProps) => {
             <span className={"current-hp"}>
                 <input
                     type={"number"}
+                    placeholder="0"
                     value={props.data.hp}
                     min={0}
                     onChange={(e) => {
@@ -98,6 +99,7 @@ const Player = (props: PlayerProps) => {
             <span className={"armor-class"}>ACP: 
                 <input
                     type={"number"}
+                    placeholder="0"
                     value={props.data.armorClass}
                     min={0}
                     onChange={(e) => {
@@ -108,6 +110,7 @@ const Player = (props: PlayerProps) => {
             <span className={"armor-class"}>ACS: 
                 <input
                     type={"number"}
+                    placeholder="0"
                     value={props.data.armorClassSpecial}
                     min={0}
                     onChange={(e) => {
