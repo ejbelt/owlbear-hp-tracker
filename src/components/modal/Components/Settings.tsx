@@ -21,6 +21,11 @@ export const Settings = () => {
         updateRoomMetadata(room, { acOffset: { x: x, y: y } });
     };
 
+    const handleAcsOffsetChange = (x: number, y: number) => {
+        updateAcsOffset({ x: x, y: y });
+        updateRoomMetadata(room, { acsOffset: { x: x, y: y } });
+    };
+
     return (
         <>
             <button className={"close-button"} onClick={async () => await OBR.modal.close(modalId)}>
@@ -125,7 +130,33 @@ export const Settings = () => {
                                 onChange={(e) => {
                                     const factor = e.target.value.startsWith("-") ? -1 : 1;
                                     const nValue = Number(e.target.value.replace(/[^0-9]/g, ""));
-                                    handleAcOffsetChange(room?.acOffset?.x || 0, nValue * factor);
+                                    handleAcOffsetChange(room?.acsOffset?.x || 0, nValue * factor);
+                                }}
+                            />
+                        </div>
+                    </div>
+                    <div className={"acs setting"}>
+                        <div className={"acs-position"}>
+                            AC Offset: X{" "}
+                            <input
+                                type={"text"}
+                                size={2}
+                                value={room?.acsOffset?.x || 0}
+                                onChange={(e) => {
+                                    const factor = e.target.value.startsWith("-") ? -1 : 1;
+                                    const nValue = Number(e.target.value.replace(/[^0-9]/g, ""));
+                                    handleAcsOffsetChange(nValue * factor, room?.acOffset?.y || 0);
+                                }}
+                            />
+                            Y{" "}
+                            <input
+                                type={"text"}
+                                size={2}
+                                value={room?.acsOffset?.y || 0}
+                                onChange={(e) => {
+                                    const factor = e.target.value.startsWith("-") ? -1 : 1;
+                                    const nValue = Number(e.target.value.replace(/[^0-9]/g, ""));
+                                    handleAcsOffsetChange(room?.acsOffset?.x || 0, nValue * factor);
                                 }}
                             />
                         </div>

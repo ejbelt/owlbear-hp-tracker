@@ -62,6 +62,7 @@ export type RoomMetadata = {
     hpBarSegments?: number;
     hpBarOffset?: number;
     acOffset?: { x: number; y: number };
+    acsOffset?: { x: number; y: number };
     acShield?: boolean;
     playerSort?: boolean;
     statblockPopover?: { width: number; height: number };
@@ -74,7 +75,7 @@ export type RoomMetadata = {
 };
 
 export type AttachmentMetadata = {
-    attachmentType: "BAR" | "AC" | "ACS" |"HP";
+    attachmentType: "BAR" | "HP" | "AC" | "ACS";
     isHpText: boolean;
 };
 
@@ -108,6 +109,7 @@ export type Ruleset = "e5" | "pf";
 export type InitialStatblockData = {
     hp: number;
     ac: number;
+    acs: number;
     bonus: number;
     slug: string;
     ruleset: Ruleset;

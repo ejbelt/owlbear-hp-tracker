@@ -16,12 +16,12 @@ type SearchResultProps = {
 export const SearchResult5e = (props: SearchResultProps) => {
     const { characterId } = useCharSheet();
     const { room } = useMetadataContext();
-    const setSheet = (slug: string, bonus: number, hp: number, ac: number) => {
+    const setSheet = (slug: string, bonus: number, hp: number, ac: number, acs: number) => {
         if (characterId) {
             if (slug === props.current) {
                 props.setForceSearch(false);
             }
-            updateTokenSheet(slug, bonus, hp, ac, characterId, "e5");
+            updateTokenSheet(slug, bonus, hp, ac, acs, characterId, "e5");
         }
     };
 
@@ -98,12 +98,12 @@ export const SearchResult5e = (props: SearchResultProps) => {
 export const SearchResultPf = (props: SearchResultProps) => {
     const { room } = useMetadataContext();
     const { characterId } = useCharSheet();
-    const setSheet = (slug: string, bonus: number, hp: number, ac: number) => {
+    const setSheet = (slug: string, bonus: number, hp: number, ac: number, acs: number) => {
         if (characterId) {
             if (slug === props.current) {
                 props.setForceSearch(false);
             }
-            updateTokenSheet(slug, bonus, hp, ac, characterId, "pf");
+            updateTokenSheet(slug, bonus, hp, ac, acs, characterId, "pf");
         }
     };
 

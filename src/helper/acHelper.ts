@@ -1,6 +1,6 @@
 import OBR, { buildCurve, buildText, Curve, Image, isCurve, isText, Item, Text } from "@owlbear-rodeo/sdk";
 import { ACItemChanges, ACSItemChanges, HpTrackerMetadata } from "./types.ts";
-import { attachmentFilter, deleteAttachments, getACOffset, getAttachedItems, getImageBounds } from "./helpers.ts";
+import { attachmentFilter, deleteAttachments, getACOffset, getACSOffset, getAttachedItems, getImageBounds } from "./helpers.ts";
 import { itemMetadataKey, infoMetadataKey } from "./variables.ts";
 
 export const createAC = async (ac: number, token: Image) => {
@@ -58,6 +58,61 @@ export const createAC = async (ac: number, token: Image) => {
     return [acShape, acText];
 };
 
+export const createACS = async (ac: number, token: Image) => {
+    const bounds = await getImageBounds(token);
+    const barHeight = Math.ceil(bounds.height / 4.85);
+    const height = Math.abs(bounds.height / 2.3);
+    const width = Math.abs(bounds.width / 3);
+    const offset = await getACSOffset(bounds.height, bounds.width);
+    const position = {
+        x: bounds.position.x + (bounds.width < 0 ? 0 : bounds.width) - width / 2 + offset.x,
+        y: bounds.position.y + bounds.height - (height + barHeight) + offset.y,
+    };
+
+    const acsShape = buildCurve()
+        .points([
+            { x: 0, y: 0 },
+            { x: width / 2, y: height / 4 },
+            { x: width, y: 0 },
+            { x: width, y: height / 1.5 },
+            { x: width / 2, y: height },
+            { x: 0, y: height / 1.5 },
+            { x: 0, y: 0 },
+        ])
+        .tension(0.1)
+        .strokeColor("black")
+        .strokeWidth(2)
+        .fillColor("grey")
+        .position(position)
+        .layer("ATTACHMENT")
+        .disableAttachmentBehavior(["VISIBLE", "ROTATION"])
+        .visible(token.visible)
+        .locked(true)
+        .attachedTo(token.id)
+        .build();
+
+    const acsText = buildText()
+        .textType("PLAIN")
+        .width(width)
+        .height(height * 0.8)
+        .position({ x: position.x, y: position.y + height * 0.2 })
+        .attachedTo(acsShape.id)
+        .locked(true)
+        .plainText(ac.toString())
+        .textAlign("CENTER")
+        .fontSize(width / 2)
+        .strokeColor("black")
+        .strokeWidth(2)
+        .fontWeight(600)
+        .textAlignVertical("MIDDLE")
+        .visible(token.visible)
+        .build();
+
+    acsShape.metadata[infoMetadataKey] = { isHpText: true, attachmentType: "AC" };
+    acsText.metadata[infoMetadataKey] = { isHPText: true, attachmentType: "AC" };
+    return [acsShape, acsText];
+};
+
 const handleACOffsetUpdate = async (offset: { x: number; y: number }, ac: Item) => {
     const change: ACItemChanges = {};
     if (ac.attachedTo) {
@@ -82,6 +137,19 @@ export const updateAcOffset = async (offset: { x: number; y: number }) => {
         (item) => item.type === "CURVE" && infoMetadataKey in item.metadata
     );
     const changeMap = new Map<string, ACItemChanges>();
+    for (const acCurve of acCurves) {
+        const change = await handleACOffsetUpdate(offset, acCurve);
+        changeMap.set(acCurve.id, change);
+    }
+
+    await updateAcChanges(changeMap);
+};
+
+export const updateAcsOffset = async (offset: { x: number; y: number }) => {
+    const acCurves = await OBR.scene.items.getItems(
+        (item) => item.type === "CURVE" && infoMetadataKey in item.metadata
+    );
+    const changeMap = new Map<string, ACSItemChanges>();
     for (const acCurve of acCurves) {
         const change = await handleACOffsetUpdate(offset, acCurve);
         changeMap.set(acCurve.id, change);
@@ -119,7 +187,7 @@ export const updateAcs = async (token: Item, data: HpTrackerMetadata) => {
         const characters = await OBR.scene.items.getItems([token.id]);
         if (characters.length > 0) {
             const character = characters[0];
-            const changes = new Map<string, ACItemChanges>();
+            const changes = new Map<string, ACSItemChanges>();
             await saveOrChangeAC(character, data, acsAttachment, changes, visible);
             await updateAcChanges(changes);
         }
@@ -235,7 +303,7 @@ export const saveOrChangeACS = async (
     character: Item,
     data: HpTrackerMetadata,
     attachments: Item[],
-    changeMap: Map<string, ACItemChanges>,
+    changeMap: Map<string, ACSItemChanges>,
     visible: boolean
 ) => {
     if (attachments.length > 0) {
@@ -258,7 +326,7 @@ export const saveOrChangeACS = async (
             });
         }
     } else {
-        const ac = await createAC(data.armorClassSpecial, character as Image);
+        const ac = await createACS(data.armorClassSpecial, character as Image);
         ac.forEach((item) => (item.visible = visible));
         await OBR.scene.items.addItems(ac);
     }

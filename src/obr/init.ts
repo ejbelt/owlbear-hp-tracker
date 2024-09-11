@@ -43,7 +43,7 @@ const initItems = async () => {
     const barChanges = new Map<string, BarItemChanges>();
     const textChanges = new Map<string, TextItemChanges>();
     const acChanges = new Map<string, ACItemChanges>();
-    const acsChanges = new Map<string, ACItemChanges>();
+    const acsChanges = new Map<string, ACSItemChanges>();
 
     for (const token of tokens) {
         const data = token.metadata[itemMetadataKey] as HpTrackerMetadata;
@@ -78,6 +78,7 @@ const initRoom = async () => {
             hpBarSegments: 0,
             hpBarOffset: 0,
             acOffset: { x: 0, y: 0 },
+            acsOffset: { x: 0, y: 0 },
             acShield: true,
             playerSort: false,
             statblockPopover: { width: 500, height: 600 },

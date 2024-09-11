@@ -17,6 +17,7 @@ export const migrateTo160 = async () => {
             hpBarSegments: hpSceneData.hpBarSegments,
             hpBarOffset: hpSceneData.hpBarOffset,
             acOffset: hpSceneData.acOffset,
+            acsOffset: hpSceneData.acsOffset,
             acShield: hpSceneData.acShield,
             playerSort: hpSceneData.playerSort,
             statblockPopover: hpSceneData.statblockPopover,
