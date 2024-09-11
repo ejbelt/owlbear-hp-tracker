@@ -1,6 +1,6 @@
 import OBR from "@owlbear-rodeo/sdk";
 import { PlayerContext, PlayerContextType } from "../context/PlayerContext.ts";
-import React, { PropsWithChildren, useState } from "react";
+import { PropsWithChildren, useState } from "react";
 
 export const ContextWrapper = (props: PropsWithChildren) => {
     const [role, setRole] = useState<string | null>(null);
