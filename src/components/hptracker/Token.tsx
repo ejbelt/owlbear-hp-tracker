@@ -160,7 +160,7 @@ export const Token = (props: TokenProps) => {
                             tempHp: currentData.tempHp,
                             hp: currentData.hp
                         });
-                        setData({ ...data, hp: currentData.hp, tempHp: currentData.tempHp });
+                        setData({ ...data, tempHp: currentData.tempHp });
                 } else if (key === "initiative") {
                     currentData.initiative = Number(value);
                     setData({ ...data, initiative: currentData.initiative });
