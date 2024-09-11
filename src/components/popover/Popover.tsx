@@ -92,7 +92,6 @@ const Layer = () => {
                     setHpTrackerActive(data.hpTrackerActive ?? false);
                     setCanPlayersSee(data.canPlayersSee ?? false);
                     setHpOnMap(data.hpOnMap ?? false);
-                    setIndex(data.index ?? 0);
                     setInitiative(data.initiative ?? 0)
                 }
             };

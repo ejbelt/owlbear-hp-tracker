@@ -263,7 +263,7 @@ const Content = () => {
             {tokens?.map((token) => {
                 const data = token.metadata[characterMetadata] as HpTrackerMetadata;
                 if (data) {
-                    return <Player key={token.id} id={token.id} data={data} item={token.item} popover={token.popover} selected={token.selected} metadata={token.metadata}/>;
+                    return <Player key={token.id} id={token.id} data={data} metadata={token.metadata}/>;
                 }
                 return null;
             })}
