@@ -154,10 +154,11 @@ export const Token = (props: TokenProps) => {
                         let temp_value =  currentData.hp + (Number(value)-currentData.tempHp)
                         currentData.tempHp = allowNegativNumbers ? Number(value) : Math.max(Number(value), 0);
                         currentData.hp = temp_value
+                        setData({ ...data, hp: currentData.hp });
                         updateHpBar(data.hpBar, props.item.id, { ...data, hp: temp_value });
                         updateText(data.hpOnMap || data.acOnMap, data.canPlayersSee && props.item.visible, props.item.id, {
                             ...data,
-                            tempHp: currentData.tempHp,
+                            maxHp: currentData.maxHp,
                             hp: currentData.hp,
                         });
                         setData({ ...data, tempHp: currentData.tempHp });
