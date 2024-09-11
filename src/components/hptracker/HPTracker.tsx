@@ -32,6 +32,28 @@ const Player = (props: PlayerProps) => {
         });
     };
 
+    const handleACChange = (value: number) => {
+        OBR.scene.items.updateItems([props.id], (items) => {
+            items.forEach((item) => {
+                const currentData: HpTrackerMetadata = item.metadata[characterMetadata] as HpTrackerMetadata;
+                currentData.armorClass += value;
+                // just assigning currentData did not trigger onChange event. Spreading helps
+                item.metadata[characterMetadata] = { ...currentData };
+            });
+        });
+    };
+
+    const handleACSChange = (value: number) => {
+        OBR.scene.items.updateItems([props.id], (items) => {
+            items.forEach((item) => {
+                const currentData: HpTrackerMetadata = item.metadata[characterMetadata] as HpTrackerMetadata;
+                currentData.armorClassSpecial += value;
+                // just assigning currentData did not trigger onChange event. Spreading helps
+                item.metadata[characterMetadata] = { ...currentData };
+            });
+        });
+    };
+
     const handleOnPlayerClick = (event: MouseEvent) => {
         OBR.scene.items.updateItems([props.id], (items) => {
             items.forEach((item) => {
@@ -69,12 +91,12 @@ const Player = (props: PlayerProps) => {
                 <button className={"hp-change plus"} onClick={() => handleHpChange(1)}></button>
             </span>
             <span className={"armor-class"}>ACP: {props.data.armorClass}
-                <button className={"hp-change minus"} onClick={() => setArmorClass(props.data.armorClass-1)}></button>
-                <button className={"hp-change plus"} onClick={() => setArmorClass(props.data.armorClass+1)}></button>
+                <button className={"hp-change minus"} onClick={() => handleACChange(props.data.armorClass-1)}></button>
+                <button className={"hp-change plus"} onClick={() => handleACChange(props.data.armorClass+1)}></button>
             </span>
             <span className={"armor-class"}>ACS: {props.data.armorClassSpecial}
-                <button className={"hp-change minus"} onClick={() => setArmorClassSpecial(props.data.armorClassSpecial-1)}></button>
-                <button className={"hp-change plus"} onClick={() => setArmorClassSpecial(props.data.armorClassSpecial+1)}></button>
+                <button className={"hp-change minus"} onClick={() => handleACSChange(props.data.armorClassSpecial-1)}></button>
+                <button className={"hp-change plus"} onClick={() => handleACSChange(props.data.armorClassSpecial+1)}></button>
             </span>
         </div>
     ) : (
