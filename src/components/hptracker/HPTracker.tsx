@@ -261,7 +261,7 @@ const Content = () => {
             {tokens?.map((token) => {
                 const data = token.metadata[characterMetadata] as HpTrackerMetadata;
                 if (data) {
-                    return <Player key={token.id} id={token.id} data={data} item={token} popover={token.popover}/>;
+                    return <Player key={token.id} id={token.id} data={data} item={token} popover={true}/>;
                 }
                 return null;
             })}
