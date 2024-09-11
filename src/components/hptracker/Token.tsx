@@ -143,7 +143,6 @@ export const Token = (props: TokenProps) => {
                     });
                     setData({ ...data, maxHp: currentData.maxHp });
                 } else if (key === "hp") {
-                    console.log(props.item.id)
                     currentData.hp = allowNegativNumbers ? Number(value) : Math.max(Number(value), 0);
                     updateHpBar(data.hpBar, props.item.id, { ...data, hp: currentData.hp });
                     updateText(data.hpOnMap || data.acOnMap, data.canPlayersSee && props.item.visible, props.item.id, {
@@ -154,7 +153,6 @@ export const Token = (props: TokenProps) => {
                 } else if (key === "tempHp") {
                         let temp_value = currentData.tempHp
                         if (Number(value) != 0) {
-                            console.log(props.item.id)
                             currentData.hp = currentData.hp + (currentData.tempHp - temp_value);
                             currentData.tempHp = allowNegativNumbers ? Number(value) : Math.max(Number(value), 0);
                             updateHpBar(data.hpBar, props.item.id, { ...data, hp: currentData.hp });
@@ -392,7 +390,6 @@ export const Token = (props: TokenProps) => {
             </div>
             <div className={"current-hp-temp"}>
                 <input
-                    ref={hpRef}
                     type={"text"}
                     size={3}
                     defaultValue={data.tempHp}
