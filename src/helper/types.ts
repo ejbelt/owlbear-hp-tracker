@@ -11,7 +11,6 @@ export type HpTrackerMetadata = {
     stats: {
         initiativeBonus: number;
     };
-    ruleset?: Ruleset;
     index: number;
     initiative: number;
 };
@@ -24,7 +23,6 @@ export type SceneMetadata = {
     hpBarOffset?: number;
     acOffset?: { x: number; y: number };
     acShield?: boolean;
-    ruleset?: Ruleset;
     groups?: Array<string>;
     openChangeLog?: boolean;
     playerSort: boolean;

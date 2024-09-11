@@ -1,17 +1,14 @@
-import React, { MouseEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ContextWrapper } from "../ContextWrapper.tsx";
 import { usePlayerContext } from "../../context/PlayerContext.ts";
 import OBR, { Item, Metadata } from "@owlbear-rodeo/sdk";
-import { characterMetadata } from "../../helper/variables.ts";
 import { SceneReadyContext } from "../../context/SceneReadyContext.ts";
 import { useCharSheet } from "../../context/CharacterContext.ts";
 import { HpTrackerMetadata, SceneMetadata } from "../../helper/types.ts";
 import "./hp-tracker.scss";
 
 import {
-    ID,
     characterMetadata,
-    textMetadata,
     sceneMetadata
 } from "../../helper/variables.ts";
 
@@ -37,16 +34,7 @@ const Player = (props: PlayerProps) => {
 
     const [data, setData] = useState<HpTrackerMetadata>(props.data);
 
-    const [editName, setEditName] = useState<boolean>(false);
-
-    const { isReady } = SceneReadyContext();
     const { setId } = useCharSheet();
-
-    const handleMetadata = (metadata: Metadata) => {
-        if (metadata && sceneMetadata in metadata) {
-            const sceneData = metadata[sceneMetadata] as SceneMetadata;;
-        }
-    };
 
     const handleHpChange = (value: number) => {
         OBR.scene.items.updateItems([props.id], (items) => {
@@ -138,16 +126,6 @@ const Player = (props: PlayerProps) => {
                 await OBR.player.select([props.item.id]);
             }
         }
-    };
-
-    const handleOnPlayerDoubleClick = async () => {
-        const bounds = await OBR.scene.items.getItemBounds([props.item.id]);
-        await OBR.player.select([props.item.id]);
-        await OBR.viewport.animateToBounds({
-            ...bounds,
-            min: { x: bounds.min.x - 1000, y: bounds.min.y - 1000 },
-            max: { x: bounds.max.x + 1000, y: bounds.max.y + 1000 },
-        });
     };
 
     const display = (): boolean => {
