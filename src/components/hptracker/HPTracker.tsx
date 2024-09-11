@@ -14,6 +14,7 @@ type PlayerProps = {
     id: string;
     item: Item;
     data: HpTrackerMetadata;
+    popover: boolean;
 };
 
 export const HPTracker = () => {
@@ -219,6 +220,15 @@ const Player = (props: PlayerProps) => {
                     }}
                 />
             </div>
+            {props.popover ? null : (
+                <div className={"info-button-wrapper"}>
+                    <button
+                        title={"Show Statblock"}
+                        className={"toggle-button info-button"}
+                        onClick={() => setId(props.item.id)}
+                    />
+                </div>
+            )}
         </div>
     ) : (
         <></>
@@ -251,7 +261,7 @@ const Content = () => {
             {tokens?.map((token) => {
                 const data = token.metadata[characterMetadata] as HpTrackerMetadata;
                 if (data) {
-                    return <Player key={token.id} id={token.id} data={data} item={token}/>;
+                    return <Player key={token.id} id={token.id} data={data} item={token} popover={token.popover}/>;
                 }
                 return null;
             })}
