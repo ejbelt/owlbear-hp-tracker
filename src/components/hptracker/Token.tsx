@@ -492,7 +492,7 @@ export const Token = (props: TokenProps) => {
                     }}
                 />
             </div>
-            <div className={"armor-class"}>
+            <div className={"armor-class-special"}>
                 <input
                     type={"text"}
                     size={1}

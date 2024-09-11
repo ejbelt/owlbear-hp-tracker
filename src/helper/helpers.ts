@@ -261,7 +261,7 @@ export const updateTokenSheet = (
                 ruleset: ruleset,
                 maxHp: newValues ? hp : data.hp,
                 armorClass: newValues ? ac : data.armorClass,
-                armorClassSpecial: newValues ? acs : data.armorClassSpecial
+                armorClassSpecial: newValues ? acs : data.armorClassSpecial,
                 hp: newValues ? hp : data.hp,
                 stats: { ...data.stats, initiativeBonus: bonus, initial: false },
             };
