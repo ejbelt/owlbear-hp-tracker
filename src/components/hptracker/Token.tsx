@@ -158,7 +158,7 @@ export const Token = (props: TokenProps) => {
                         updateText(data.hpOnMap || data.acOnMap, data.canPlayersSee && props.item.visible, props.item.id, {
                             ...data,
                             tempHp: currentData.tempHp,
-                            hp: currentData.hp
+                            hp: currentData.hp,
                         });
                         setData({ ...data, tempHp: currentData.tempHp });
                 } else if (key === "initiative") {
