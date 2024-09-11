@@ -167,6 +167,26 @@
         }
     }
 
+    .current-hp-temp {
+        display: flex;
+        gap: 5px;
+        white-space: nowrap;
+
+        input {
+            width: 20%;
+            min-width: 25px;
+            text-align: right;
+        }
+
+        &::before {
+            content: "Temp HP: ";
+
+            @include breakpoint.laptop {
+                display: none;
+            }
+        }
+    }
+
     .armor-class {
         display: flex;
         justify-self: flex-end;

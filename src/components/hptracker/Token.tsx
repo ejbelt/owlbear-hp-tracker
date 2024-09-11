@@ -71,6 +71,9 @@ export const Token = (props: TokenProps) => {
             if (data.hp < 0) {
                 handleValueChange(0, "hp");
             }
+            if (data.tempHp < 0) {
+                handleValueChange(0, "tempHp");
+            }
             if (data.armorClass < 0) {
                 handleValueChange(0, "armorClass");
             }
@@ -147,6 +150,16 @@ export const Token = (props: TokenProps) => {
                         hp: currentData.hp,
                     });
                     setData({ ...data, hp: currentData.hp });
+                } else if (key === "tempHp") {
+                        let temp_value =  currentData.hp + (Number(value)-currentData.tempHp)
+                        currentData.tempHp = allowNegativNumbers ? Number(value) : Math.max(Number(value), 0);
+                        currentData.hp = temp_value
+                        updateHpBar(data.hpBar, props.item.id, { ...data, hp: temp_value });
+                        updateText(data.hpOnMap || data.acOnMap, data.canPlayersSee && props.item.visible, props.item.id, {
+                            ...data,
+                            tempHp: currentData.tempHp,
+                        });
+                        setData({ ...data, hp: currentData.hp });
                 } else if (key === "initiative") {
                     currentData.initiative = Number(value);
                     setData({ ...data, initiative: currentData.initiative });
@@ -359,6 +372,40 @@ export const Token = (props: TokenProps) => {
                     onBlur={(e) => {
                         const value = Number(e.target.value.replace(/[^0-9]/g, ""));
                         handleValueChange(Number(value), "maxHP", true);
+                    }}
+                />
+            </div>
+            <div className={"current-hp-temp"}>
+                <input
+                    ref={hpRef}
+                    type={"text"}
+                    size={3}
+                    defaultValue={data.tempHp}
+                    onBlur={(e) => {
+                        const input = e.target.value;
+                        const hp = getNewHpValue(input);
+                        if (hp !== null) {
+                            e.target.value = hp.toString();
+                            handleValueChange(hp, "tempHp");
+                        }
+                    }}
+                    onKeyDown={(e) => {
+                        if (e.key === "ArrowUp") {
+                            const hp = Math.min(data.hp + 1, data.maxHp);
+                            handleValueChange(hp, "tempHp");
+                            e.currentTarget.value = hp.toString();
+                        } else if (e.key === "ArrowDown") {
+                            const hp = Math.min(data.hp - 1, data.maxHp);
+                            handleValueChange(hp, "tempHp");
+                            e.currentTarget.value = hp.toString();
+                        } else if (e.key === "Enter") {
+                            const input = e.currentTarget.value;
+                            const hp = getNewHpValue(input);
+                            if (hp !== null) {
+                                e.currentTarget.value = hp.toString();
+                                handleValueChange(hp, "tempHp");
+                            }
+                        }
                     }}
                 />
             </div>

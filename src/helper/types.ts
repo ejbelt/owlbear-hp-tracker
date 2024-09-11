@@ -2,6 +2,7 @@ export type HpTrackerMetadata = {
     name: string;
     hp: number;
     maxHp: number;
+    tempHp: number;
     armorClass: number;
     armorClassSpecial: number;
     hpTrackerActive: boolean;

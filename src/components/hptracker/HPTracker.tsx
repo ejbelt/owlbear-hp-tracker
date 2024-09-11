@@ -203,6 +203,7 @@ const Content = () => {
                     <span>Name</span>
                     {playerContext.role === "GM" ? <span>Settings</span> : null}
                     <span className={"current-hp"}>HP / MAX</span>
+                    <span className={"current-hp-temp"}>Temp HP</span>
                     <span className={"armor-class"}>ACP</span>
                     <span className={"armor-class-special"}>ACS</span>
                     <span className={"initiative-wrapper"}>INIT</span>
