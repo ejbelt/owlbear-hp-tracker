@@ -91,12 +91,12 @@ const Player = (props: PlayerProps) => {
                 <button className={"hp-change plus"} onClick={() => handleHpChange(1)}></button>
             </span>
             <span className={"armor-class"}>ACP: {props.data.armorClass}
-                <button className={"hp-change minus"} onClick={() => handleACChange(props.data.armorClass-1)}></button>
-                <button className={"hp-change plus"} onClick={() => handleACChange(props.data.armorClass+1)}></button>
+                <button className={"hp-change minus"} onClick={() => handleACChange(-1)}></button>
+                <button className={"hp-change plus"} onClick={() => handleACChange(1)}></button>
             </span>
             <span className={"armor-class"}>ACS: {props.data.armorClassSpecial}
-                <button className={"hp-change minus"} onClick={() => handleACSChange(props.data.armorClassSpecial-1)}></button>
-                <button className={"hp-change plus"} onClick={() => handleACSChange(props.data.armorClassSpecial+1)}></button>
+                <button className={"hp-change minus"} onClick={() => handleACSChange(-1)}></button>
+                <button className={"hp-change plus"} onClick={() => handleACSChange(1)}></button>
             </span>
         </div>
     ) : (
