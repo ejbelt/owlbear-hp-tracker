@@ -254,7 +254,7 @@ export const Token = (props: TokenProps) => {
         }
         let hp = 0;
         if (data.maxHp > 0) {
-            hp = Math.min(Number(value * factor), data.maxHp);
+            hp = Math.min(Number(value * factor), data.maxHp+data.tempHp);
         } else {
             hp = Number(value * factor);
             handleValueChange(hp, "hpMaxHp");
@@ -350,11 +350,11 @@ export const Token = (props: TokenProps) => {
                     }}
                     onKeyDown={(e) => {
                         if (e.key === "ArrowUp") {
-                            const hp = Math.min(data.hp + 1, data.maxHp);
+                            const hp = Math.min(data.hp + 1, data.maxHp+data.tempHp);
                             handleValueChange(hp, "hp");
                             e.currentTarget.value = hp.toString();
                         } else if (e.key === "ArrowDown") {
-                            const hp = Math.min(data.hp - 1, data.maxHp);
+                            const hp = Math.min(data.hp - 1, data.maxHp+data.tempHp);
                             handleValueChange(hp, "hp");
                             e.currentTarget.value = hp.toString();
                         } else if (e.key === "Enter") {
