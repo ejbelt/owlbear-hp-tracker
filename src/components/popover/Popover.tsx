@@ -42,13 +42,13 @@ const Layer = () => {
                         name: name,
                         maxHp: maxHp,
                         hp: hp,
-                        tmp_hp: tmp_hp,
+                        temp_hp: temp_hp,
                         armorClass: armorClass,
                         armorClassSpecial: armorClassSpecial,
                         hpTrackerActive: hpTrackerActive,
                         canPlayersSee: canPlayersSee,
                         hpOnMap: hpOnMap,
-                        index: index
+                        index: index,
                         initiative: initiative
                     };
                     item.metadata[characterMetadata] = {
