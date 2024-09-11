@@ -108,7 +108,7 @@ const Player = (props: PlayerProps) => {
                 <span>/</span>
                 <span>{props.data.maxHp}</span>
             </span>
-            <span className={"current-hp"}>ACP:
+            <span className={"current-hp"}>TMP:
                 <input
                     type={"number"}
                     placeholder="0"
