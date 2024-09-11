@@ -47,7 +47,6 @@ const Layer = () => {
                         hpTrackerActive: hpTrackerActive,
                         canPlayersSee: canPlayersSee,
                         hpOnMap: hpOnMap,
-                        index: index,
                         initiative: initiative
                     };
                     item.metadata[characterMetadata] = {

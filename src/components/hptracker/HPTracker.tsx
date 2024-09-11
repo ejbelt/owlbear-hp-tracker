@@ -12,10 +12,7 @@ import {
 
 type PlayerProps = {
     id: string;
-    item: Item;
     data: HpTrackerMetadata;
-    popover: boolean;
-    selected: boolean;
 };
 
 export const HPTracker = () => {
