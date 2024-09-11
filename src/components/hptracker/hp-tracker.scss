@@ -1,7 +1,7 @@
 .hp-tracker {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 2px;
 
     .player-wrapper {
         display: grid;
@@ -21,12 +21,12 @@
 
         .current-hp {
             display: flex;
-            gap: 10px;
+            gap: 5px;
         }
 
         .armor-class {
-            display: flex;
-            gap: 10px;
+            justify-self: flex;
+            gap: 5px;
         }
 
         .armor-class-special {
@@ -34,7 +34,6 @@
         }
 
         input[type="number"] {
-            display: flex;
             border: none;
             background-color: transparent;
             width: 40px;
