@@ -95,7 +95,7 @@ const Player = (props: PlayerProps) => {
                 <span>/</span>
                 <span>{props.data.maxHp}</span>
             </span>
-            <span className={"armor-class"}>ACP: 
+            <span className={"armor-class"}>| ACP: 
                 <input
                     type={"number"}
                     value={props.data.armorClass}
@@ -105,7 +105,7 @@ const Player = (props: PlayerProps) => {
                     }}
                 />
             </span>
-            <span className={"armor-class"}>ACS: 
+            <span className={"armor-class"}>| ACS: 
                 <input
                     type={"number"}
                     value={props.data.armorClassSpecial}
