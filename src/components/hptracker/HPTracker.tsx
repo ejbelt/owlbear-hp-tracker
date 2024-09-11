@@ -8,6 +8,7 @@ import "./hp-tracker.scss";
 
 type PlayerProps = {
     id: string;
+    item: Item;
     data: HpTrackerMetadata;
     popover: boolean;
     selected: boolean;
