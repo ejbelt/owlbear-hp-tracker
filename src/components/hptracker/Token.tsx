@@ -151,18 +151,26 @@ export const Token = (props: TokenProps) => {
                     });
                     setData({ ...data, hp: currentData.hp });
                 } else if (key === "tempHp") {
-                        let temp_value =  currentData.hp + (Number(value)-currentData.tempHp)
-                        console.log("Output");
-                        console.log(temp_value);
-                        currentData.tempHp = allowNegativNumbers ? Number(value) : Math.max(Number(value), 0);
-                        currentData.hp = temp_value
-                        updateHpBar(data.hpBar, props.item.id, { ...data, hp: temp_value });
-                        updateText(data.hpOnMap || data.acOnMap, data.canPlayersSee && props.item.visible, props.item.id, {
-                            ...data,
-                            tempHp: currentData.tempHp,
-                            hp: currentData.hp,
-                        });
-                        setData({ ...data, tempHp: currentData.tempHp, hp: currentData.hp });
+                        let temp_value = currentData.tempHp
+                        if (Number(value) != 0) {
+                            currentData.tempHp = allowNegativNumbers ? Number(value) : Math.max(Number(value), 0);
+                            currentData.hp = currentData.hp + (currentData.tempHp - temp_value);
+                            setData({ ...data, hp: currentData.hp });
+                            updateHpBar(data.hpBar, props.item.id, { ...data, hp: temp_value });
+                            updateText(data.hpOnMap || data.acOnMap, data.canPlayersSee && props.item.visible, props.item.id, {
+                                ...data,
+                                tempHp: currentData.tempHp,
+                                hp: currentData.hp,
+                            });
+                        } else {
+                            currentData.tempHp = allowNegativNumbers ? Number(value) : Math.max(Number(value), 0);
+                            updateText(data.hpOnMap || data.acOnMap, data.canPlayersSee && props.item.visible, props.item.id, {
+                                ...data,
+                                tempHp: currentData.tempHp,
+                                hp: currentData.hp,
+                            });
+                        }
+                        setData({ ...data, tempHp: currentData.tempHp });
                 } else if (key === "initiative") {
                     currentData.initiative = Number(value);
                     setData({ ...data, initiative: currentData.initiative });
