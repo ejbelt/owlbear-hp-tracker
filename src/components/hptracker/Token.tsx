@@ -158,8 +158,9 @@ export const Token = (props: TokenProps) => {
                         updateText(data.hpOnMap || data.acOnMap, data.canPlayersSee && props.item.visible, props.item.id, {
                             ...data,
                             tempHp: currentData.tempHp,
+                            hp: currentData.hp
                         });
-                        setData({ ...data, hp: currentData.hp });
+                        setData({ ...data, hp: currentData.hp, tempHp: currentData.tempHp });
                 } else if (key === "initiative") {
                     currentData.initiative = Number(value);
                     setData({ ...data, initiative: currentData.initiative });
