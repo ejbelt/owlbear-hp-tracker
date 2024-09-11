@@ -75,8 +75,10 @@ const Layer = () => {
                         hpTrackerActive: false,
                         canPlayersSee: false,
                         hpOnMap: false,
-                        index: 0,
-                        initiative: 0
+                        initiative: 0,
+                        stats: {
+                            initiativeBonus: 0
+                        }
                     };
                     if (characterMetadata in item.metadata) {
                         data = item.metadata[characterMetadata] as HpTrackerMetadata;

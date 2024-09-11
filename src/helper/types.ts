@@ -11,7 +11,6 @@ export type HpTrackerMetadata = {
     stats: {
         initiativeBonus: number;
     };
-    index: number;
     initiative: number;
 };
 

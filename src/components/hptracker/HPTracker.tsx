@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { ContextWrapper } from "../ContextWrapper.tsx";
 import { usePlayerContext } from "../../context/PlayerContext.ts";
-import OBR, { Item, Metadata } from "@owlbear-rodeo/sdk";
-import { SceneReadyContext } from "../../context/SceneReadyContext.ts";
+import OBR, { Item } from "@owlbear-rodeo/sdk";
 import { useCharSheet } from "../../context/CharacterContext.ts";
 import { HpTrackerMetadata, SceneMetadata } from "../../helper/types.ts";
 import "./hp-tracker.scss";
 
 import {
-    characterMetadata,
-    sceneMetadata
+    characterMetadata
 } from "../../helper/variables.ts";
 
 type PlayerProps = {
@@ -265,7 +263,7 @@ const Content = () => {
             {tokens?.map((token) => {
                 const data = token.metadata[characterMetadata] as HpTrackerMetadata;
                 if (data) {
-                    return <Player key={token.id} id={token.id} data={data} />;
+                    return <Player key={token.id} id={token.id} data={data} item={token.item} popover={token.popover} selected={token.selected} metadata={token.metadata}/>;
                 }
                 return null;
             })}
