@@ -31,7 +31,6 @@ const Layer = () => {
     const [hpTrackerActive, setHpTrackerActive] = useState<boolean>(false);
     const [canPlayersSee, setCanPlayersSee] = useState<boolean>(false);
     const [hpOnMap, setHpOnMap] = useState<boolean>(false);
-    const [index, setIndex] = useState<number>(0);
     const [initiative, setInitiative] = useState<number>(0);
 
     useEffect(() => {

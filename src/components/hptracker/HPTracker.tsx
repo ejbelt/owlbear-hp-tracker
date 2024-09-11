@@ -3,7 +3,7 @@ import { ContextWrapper } from "../ContextWrapper.tsx";
 import { usePlayerContext } from "../../context/PlayerContext.ts";
 import OBR, { Item } from "@owlbear-rodeo/sdk";
 import { useCharSheet } from "../../context/CharacterContext.ts";
-import { HpTrackerMetadata, SceneMetadata } from "../../helper/types.ts";
+import { HpTrackerMetadata } from "../../helper/types.ts";
 import "./hp-tracker.scss";
 
 import {
@@ -16,7 +16,6 @@ type PlayerProps = {
     data: HpTrackerMetadata;
     popover: boolean;
     selected: boolean;
-    metadata: SceneMetadata;
 };
 
 export const HPTracker = () => {
@@ -263,7 +262,7 @@ const Content = () => {
             {tokens?.map((token) => {
                 const data = token.metadata[characterMetadata] as HpTrackerMetadata;
                 if (data) {
-                    return <Player key={token.id} id={token.id} data={data} metadata={token.metadata}/>;
+                    return <Player key={token.id} id={token.id} data={data}/>;
                 }
                 return null;
             })}
