@@ -151,13 +151,10 @@ export const Token = (props: TokenProps) => {
                     });
                     setData({ ...data, hp: currentData.hp });
                 } else if (key === "tempHp") {
-                        let temp_value = (Number(value)-currentData.tempHp)
                         currentData.tempHp = allowNegativNumbers ? Number(value) : Math.max(Number(value), 0);
-                        currentData.hp += temp_value
                         updateText(data.hpOnMap || data.acOnMap, data.canPlayersSee && props.item.visible, props.item.id, {
                             ...data,
                             tempHp: currentData.tempHp,
-                            hp: currentData.hp,
                         });
                         setData({ ...data, tempHp: currentData.tempHp });
                 } else if (key === "initiative") {
