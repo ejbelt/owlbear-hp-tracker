@@ -28,9 +28,6 @@ const Player = (props: PlayerProps) => {
 
     const [data, setData] = useState<HpTrackerMetadata>(props.data);
 
-    const [editName, setEditName] = useState<boolean>(false);
-
-    const { isReady } = SceneReadyContext();
     const { setId } = useCharSheet();
 
     const handleMetadata = (metadata: Metadata) => {
