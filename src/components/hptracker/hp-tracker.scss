@@ -7,9 +7,9 @@
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         justify-items: flex-start;
-        gap: 20px;
+        gap: 14px;
         border-bottom: 1px solid white;
-        padding: 1px 8px 1px 1px;
+        padding: 8px 8px 1px;
 
         .player-name {
             cursor: pointer;
