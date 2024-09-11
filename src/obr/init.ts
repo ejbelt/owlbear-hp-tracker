@@ -15,6 +15,7 @@ const initItems = async () => {
                     hp: 0,
                     maxHp: 0,
                     armorClass: 0,
+                    armorClassSpecial: 0,
                     hpTrackerActive: false,
                     canPlayersSee: false,
                     hpOnMap: false,

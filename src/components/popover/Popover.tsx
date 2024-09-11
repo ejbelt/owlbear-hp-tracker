@@ -25,6 +25,7 @@ const Layer = () => {
     const [hp, setHp] = useState<number>(0);
     const [maxHp, setMaxHp] = useState<number>(0);
     const [armorClass, setArmorClass] = useState<number>(0);
+    const [armorClassSpecial, setArmorClassSpecial] = useState<number>(0);
     const [name, setName] = useState<string>("");
     const [hpTrackerActive, setHpTrackerActive] = useState<boolean>(false);
     const [canPlayersSee, setCanPlayersSee] = useState<boolean>(false);
@@ -39,6 +40,7 @@ const Layer = () => {
                         maxHp: maxHp,
                         hp: hp,
                         armorClass: armorClass,
+                        armorClassSpecial: armorClassSpecial,
                         hpTrackerActive: hpTrackerActive,
                         canPlayersSee: canPlayersSee,
                         hpOnMap: hpOnMap,
@@ -49,7 +51,7 @@ const Layer = () => {
                 });
             });
         }
-    }, [hp, maxHp, name, hpTrackerActive, canPlayersSee, hpOnMap, armorClass]);
+    }, [hp, maxHp, name, hpTrackerActive, canPlayersSee, hpOnMap, armorClass, armorClassSpecial]);
 
     useEffect(() => {
         if (id) {
@@ -62,6 +64,7 @@ const Layer = () => {
                         hp: 0,
                         maxHp: 0,
                         armorClass: 0,
+                        armorClassSpecial: 0,
                         hpTrackerActive: false,
                         canPlayersSee: false,
                         hpOnMap: false,
@@ -72,6 +75,7 @@ const Layer = () => {
                     setName(data.name !== "" ? data.name : item.name);
                     setHp(data.hp ?? 0);
                     setArmorClass(data.armorClass ?? 0);
+                    setArmorClassSpecial(data.armorClassSpecial ?? 0);
                     setMaxHp(data.maxHp ?? 0);
                     setHpTrackerActive(data.hpTrackerActive ?? false);
                     setCanPlayersSee(data.canPlayersSee ?? false);
@@ -118,13 +122,24 @@ const Layer = () => {
                 />
             </label>
             <label>
-                AC:
+                ACP:
                 <input
                     type={"number"}
                     value={armorClass}
                     min={0}
                     onChange={(e) => {
                         setArmorClass(Number(e.target.value));
+                    }}
+                />
+            </label>
+            <label>
+                ACS:
+                <input
+                    type={"number"}
+                    value={armorClassSpecial}
+                    min={0}
+                    onChange={(e) => {
+                        setArmorClassSpecial(Number(e.target.value));
                     }}
                 />
             </label>
