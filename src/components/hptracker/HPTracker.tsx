@@ -199,6 +199,7 @@ const Player = (props: PlayerProps) => {
             <div className={"initiative-wrapper"}>
                 <input
                     type={"text"}
+                    placeholder="0"
                     size={1}
                     value={data.initiative}
                     onChange={(e) => {
