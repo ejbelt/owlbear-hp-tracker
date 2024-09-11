@@ -3,7 +3,6 @@ import { usePlayerContext } from "../../context/PlayerContext.ts";
 import React, { useEffect, useRef, useState } from "react";
 import OBR, { Item, Metadata } from "@owlbear-rodeo/sdk";
 import { characterMetadata, sceneMetadata } from "../../helper/variables.ts";
-import { useCharSheet } from "../../context/CharacterContext.ts";
 import { useGetOpen5eMonster } from "../../open5e/useOpen5e.ts";
 import { SceneReadyContext } from "../../context/SceneReadyContext.ts";
 import { updateText } from "../../helper/textHelpers.ts";
