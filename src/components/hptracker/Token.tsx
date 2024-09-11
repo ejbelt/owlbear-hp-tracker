@@ -151,10 +151,14 @@ export const Token = (props: TokenProps) => {
                     });
                     setData({ ...data, hp: currentData.hp });
                 } else if (key === "tempHp") {
+                        let temp_value =  currentData.hp + (Number(value)-currentData.tempHp)
                         currentData.tempHp = allowNegativNumbers ? Number(value) : Math.max(Number(value), 0);
+                        currentData.hp = temp_value
+                        updateHpBar(data.hpBar, props.item.id, { ...data, hp: temp_value });
                         updateText(data.hpOnMap || data.acOnMap, data.canPlayersSee && props.item.visible, props.item.id, {
                             ...data,
                             tempHp: currentData.tempHp,
+                            hp: currentData.hp,
                         });
                         setData({ ...data, tempHp: currentData.tempHp });
                 } else if (key === "initiative") {
@@ -388,11 +392,11 @@ export const Token = (props: TokenProps) => {
                     }}
                     onKeyDown={(e) => {
                         if (e.key === "ArrowUp") {
-                            const hp = Math.min(data.hp + 1, data.maxHp);
+                            const hp = Math.max(data.tempHp + 1, 0);
                             handleValueChange(hp, "tempHp");
                             e.currentTarget.value = hp.toString();
                         } else if (e.key === "ArrowDown") {
-                            const hp = Math.min(data.hp - 1, data.maxHp);
+                            const hp = Math.max(data.tempHp - 1, 0);
                             handleValueChange(hp, "tempHp");
                             e.currentTarget.value = hp.toString();
                         } else if (e.key === "Enter") {
