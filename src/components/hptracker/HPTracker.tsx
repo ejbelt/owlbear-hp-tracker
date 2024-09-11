@@ -12,6 +12,7 @@ import {
 
 type PlayerProps = {
     id: string;
+    item: Item;
     data: HpTrackerMetadata;
 };
 
@@ -259,7 +260,7 @@ const Content = () => {
             {tokens?.map((token) => {
                 const data = token.metadata[characterMetadata] as HpTrackerMetadata;
                 if (data) {
-                    return <Player key={token.id} id={token.id} data={data}/>;
+                    return <Player key={token.id} id={token.id} data={data} item={token.item}/>;
                 }
                 return null;
             })}
