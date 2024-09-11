@@ -32,6 +32,7 @@ const Layer = () => {
     const [canPlayersSee, setCanPlayersSee] = useState<boolean>(false);
     const [hpOnMap, setHpOnMap] = useState<boolean>(false);
     const [index, setIndex] = useState<number>(0);
+    const [initiative, setInitiative] = useState<number>(0);
 
     useEffect(() => {
         if (id) {
@@ -48,6 +49,7 @@ const Layer = () => {
                         canPlayersSee: canPlayersSee,
                         hpOnMap: hpOnMap,
                         index: index
+                        initiative: initiative
                     };
                     item.metadata[characterMetadata] = {
                         ...data,
@@ -55,7 +57,7 @@ const Layer = () => {
                 });
             });
         }
-    }, [hp, maxHp, name, hpTrackerActive, canPlayersSee, hpOnMap, armorClass, armorClassSpecial]);
+    }, [hp, maxHp, name, hpTrackerActive, canPlayersSee, hpOnMap, armorClass, armorClassSpecial, initiative]);
 
     useEffect(() => {
         if (id) {
@@ -67,13 +69,14 @@ const Layer = () => {
                         name: item.name,
                         hp: 0,
                         maxHp: 0,
-                        tmp_hp: 0,
+                        temp_hp: 0,
                         armorClass: 0,
                         armorClassSpecial: 0,
                         hpTrackerActive: false,
                         canPlayersSee: false,
                         hpOnMap: false,
-                        index: 0
+                        index: 0,
+                        initiative: 0
                     };
                     if (characterMetadata in item.metadata) {
                         data = item.metadata[characterMetadata] as HpTrackerMetadata;
@@ -88,6 +91,7 @@ const Layer = () => {
                     setCanPlayersSee(data.canPlayersSee ?? false);
                     setHpOnMap(data.hpOnMap ?? false);
                     setIndex(data.index ?? 0);
+                    setInitiative(data.initiative ?? 0)
                 }
             };
             initTokens();

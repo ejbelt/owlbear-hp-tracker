@@ -9,6 +9,7 @@ export type HpTrackerMetadata = {
     canPlayersSee: boolean;
     hpOnMap: boolean;
     index: number;
+    initiative: number;
 };
 
 export type HpTextMetadata = {

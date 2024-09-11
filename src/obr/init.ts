@@ -14,11 +14,14 @@ const initItems = async () => {
                     name: "",
                     hp: 0,
                     maxHp: 0,
+                    temp_hp: 0,
                     armorClass: 0,
                     armorClassSpecial: 0,
                     hpTrackerActive: false,
                     canPlayersSee: false,
                     hpOnMap: false,
+                    index: 0,
+                    initiative: 0
                 };
             }
         });
