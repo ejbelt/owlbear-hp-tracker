@@ -13,6 +13,7 @@ export type SearchResult = {
     group: string | null;
     alignment: string;
     armor_class: number;
+    armor_class_special: number;
     armor_desc: string;
     hit_points: number;
     hit_dice: string;
