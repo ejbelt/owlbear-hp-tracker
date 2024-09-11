@@ -10,8 +10,8 @@
         "title": "HP Tracker",
         "icon": "/icon.svg",
         "popover": "/",
-        "height": 40,
-        "width": 40
+        "height": 600,
+        "width": 400
     },
     "background_url": "/background.html"
 }
