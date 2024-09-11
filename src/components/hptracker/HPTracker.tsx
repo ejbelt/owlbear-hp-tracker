@@ -3,8 +3,17 @@ import { ContextWrapper } from "../ContextWrapper.tsx";
 import { usePlayerContext } from "../../context/PlayerContext.ts";
 import OBR, { Item, Metadata } from "@owlbear-rodeo/sdk";
 import { characterMetadata } from "../../helper/variables.ts";
+import { SceneReadyContext } from "../../context/SceneReadyContext.ts";
+import { useCharSheet } from "../../context/CharacterContext.ts";
 import { HpTrackerMetadata, SceneMetadata } from "../../helper/types.ts";
 import "./hp-tracker.scss";
+
+import {
+    ID,
+    characterMetadata,
+    textMetadata,
+    sceneMetadata
+} from "../../helper/variables.ts";
 
 type PlayerProps = {
     id: string;
@@ -35,8 +44,7 @@ const Player = (props: PlayerProps) => {
 
     const handleMetadata = (metadata: Metadata) => {
         if (metadata && sceneMetadata in metadata) {
-            const sceneData = metadata[sceneMetadata] as SceneMetadata;
-            setAllowNegativeNumbers(sceneData.allowNegativeNumbers ?? false);
+            const sceneData = metadata[sceneMetadata] as SceneMetadata;;
         }
     };
 
@@ -102,6 +110,15 @@ const Player = (props: PlayerProps) => {
                 currentData.armorClassSpecial = value;
                 // just assigning currentData did not trigger onChange event. Spreading helps
                 item.metadata[characterMetadata] = { ...currentData };
+            });
+        });
+    };
+
+    const handleValueChange = (newData: HpTrackerMetadata) => {
+        OBR.scene.items.updateItems([props.item], (items) => {
+            items.forEach((item) => {
+                // just assigning currentData did not trigger onChange event. Spreading helps
+                item.metadata[characterMetadata] = { ...newData };
             });
         });
     };

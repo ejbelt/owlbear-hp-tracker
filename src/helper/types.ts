@@ -8,6 +8,10 @@ export type HpTrackerMetadata = {
     hpTrackerActive: boolean;
     canPlayersSee: boolean;
     hpOnMap: boolean;
+    stats: {
+        initiativeBonus: number;
+    };
+    ruleset?: Ruleset;
     index: number;
     initiative: number;
 };
