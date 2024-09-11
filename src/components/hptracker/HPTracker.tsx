@@ -1,7 +1,7 @@
 import React, { MouseEvent, useEffect, useState } from "react";
 import { ContextWrapper } from "../ContextWrapper.tsx";
 import { usePlayerContext } from "../../context/PlayerContext.ts";
-import OBR, { Item } from "@owlbear-rodeo/sdk";
+import OBR, { Item, Metadata } from "@owlbear-rodeo/sdk";
 import { characterMetadata } from "../../helper/variables.ts";
 import { HpTrackerMetadata } from "../../helper/types.ts";
 import "./hp-tracker.scss";
@@ -9,6 +9,9 @@ import "./hp-tracker.scss";
 type PlayerProps = {
     id: string;
     data: HpTrackerMetadata;
+    popover: boolean;
+    selected: boolean;
+    metadata: SceneMetadata;
 };
 
 export const HPTracker = () => {
@@ -21,6 +24,21 @@ export const HPTracker = () => {
 
 const Player = (props: PlayerProps) => {
     const playerContext = usePlayerContext();
+
+    const [data, setData] = useState<HpTrackerMetadata>(props.data);
+
+    const [editName, setEditName] = useState<boolean>(false);
+
+    const { isReady } = SceneReadyContext();
+    const { setId } = useCharSheet();
+
+    const handleMetadata = (metadata: Metadata) => {
+        if (metadata && sceneMetadata in metadata) {
+            const sceneData = metadata[sceneMetadata] as SceneMetadata;
+            setAllowNegativeNumbers(sceneData.allowNegativeNumbers ?? false);
+        }
+    };
+
     const handleHpChange = (value: number) => {
         OBR.scene.items.updateItems([props.id], (items) => {
             items.forEach((item) => {
@@ -38,6 +56,27 @@ const Player = (props: PlayerProps) => {
                 const currentData: HpTrackerMetadata = item.metadata[characterMetadata] as HpTrackerMetadata;
                 currentData.hp = currentData.hp + (value-currentData.temp_hp);
                 currentData.temp_hp = value;
+                // just assigning currentData did not trigger onChange event. Spreading helps
+                item.metadata[characterMetadata] = { ...currentData };
+            });
+        });
+    };
+
+    const handleMaxHpChange = (value: number) => {
+        OBR.scene.items.updateItems([props.id], (items) => {
+            items.forEach((item) => {
+                const currentData: HpTrackerMetadata = item.metadata[characterMetadata] as HpTrackerMetadata;
+                let maxHP = value
+                if (currentData.temp_hp != 0){
+                    maxHP += currentData.temp_hp
+                }
+
+                if (maxHP < currentData.hp){
+                    currentData.hp = maxHP
+                }
+
+                currentData.maxHp = maxHP
+
                 // just assigning currentData did not trigger onChange event. Spreading helps
                 item.metadata[characterMetadata] = { ...currentData };
             });
@@ -96,8 +135,7 @@ const Player = (props: PlayerProps) => {
     const display = (): boolean => {
         return (
             props.data.hpTrackerActive &&
-            (playerContext.role === "GM" ||
-                (playerContext.role === "PLAYER" && props.data.canPlayersSee && props.item.visible))
+            (playerContext.role === "GM" || (playerContext.role === "PLAYER" && props.data.canPlayersSee))
         );
     };
 
@@ -123,7 +161,15 @@ const Player = (props: PlayerProps) => {
                     }}
                 />
                 <span>/</span>
-                <span>{props.data.maxHp}</span>
+                <input
+                    type={"number"}
+                    placeholder="0"
+                    value={props.data.maxHp}
+                    min={0}
+                    onChange={(e) => {
+                        handleMaxHpChange(Number(e.target.value));
+                    }}
+                />
             </span>
             <span className={"armor-class"}>TMP:
                 <input
