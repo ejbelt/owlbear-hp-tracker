@@ -72,7 +72,8 @@ export const SearchResult5e = (props: SearchResultProps) => {
                                         entry.slug,
                                         Math.floor((entry.stats.dexterity - 10) / 2),
                                         entry.hp.value,
-                                        entry.armor_class.value
+                                        entry.armor_class.value,
+                                        entry.armor_class_special.value
                                     )
                                 }
                             >
@@ -148,7 +149,8 @@ export const SearchResultPf = (props: SearchResultProps) => {
                                         entry.slug,
                                         entry.perception ? parseInt(entry.perception) : 0,
                                         entry.hp.value,
-                                        entry.armor_class.value
+                                        entry.armor_class.value,
+                                        entry.armor_class_special.value
                                     )
                                 }
                             >

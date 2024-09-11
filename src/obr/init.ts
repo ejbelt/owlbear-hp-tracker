@@ -60,6 +60,7 @@ const initItems = async () => {
         }
         if (data.acOnMap) {
             await saveOrChangeAC(token, data, acAttachments, acChanges, token.visible && data.canPlayersSee);
+            await saveOrChangeACS(token, data, acAttachments, acsChanges, token.visible && data.canPlayersSee);
         }
     }
 
@@ -220,6 +221,7 @@ const setupContextMenu = async () => {
                                 hp: 0,
                                 maxHp: 0,
                                 armorClass: 0,
+                                armorClassSpecial: 0,
                                 hpTrackerActive: true,
                                 canPlayersSee: false,
                                 hpOnMap: false,
@@ -238,6 +240,7 @@ const setupContextMenu = async () => {
                                 defaultMetadata.maxHp = itemStatblocks[item.id].hp;
                                 defaultMetadata.hp = itemStatblocks[item.id].hp;
                                 defaultMetadata.armorClass = itemStatblocks[item.id].ac;
+                                defaultMetadata.armorClassSpecial = itemStatblocks[item.id].acs;
                                 defaultMetadata.stats.initiativeBonus = itemStatblocks[item.id].bonus;
                                 defaultMetadata.stats.initial = true;
                             }
@@ -322,6 +325,7 @@ const initTokens = async () => {
         });
         await updateTextVisibility(tokens);
         await updateAcVisibility(tokens);
+        await updateAcsVisibility(tokens);
     });
 };
 

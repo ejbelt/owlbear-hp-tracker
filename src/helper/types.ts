@@ -31,6 +31,7 @@ export type SceneMetadata_Deprecated = {
     hpBarSegments?: number;
     hpBarOffset?: number;
     acOffset?: { x: number; y: number };
+    acsOffset?: { x: number; y: number };
     acShield?: boolean;
     ruleset?: Ruleset;
     groups?: Array<string>;

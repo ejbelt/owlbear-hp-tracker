@@ -4,7 +4,7 @@ import { updateHpOffset } from "../../../helper/hpHelpers.ts";
 import { Groups } from "./Groups.tsx";
 import { Switch } from "../../general/Switch/Switch.tsx";
 import { dndSvg, pfSvg } from "./SwitchBackground.ts";
-import { updateAcOffset } from "../../../helper/acHelper.ts";
+import { updateAcOffset, updateAcsOffset } from "../../../helper/acHelper.ts";
 import { useMetadataContext } from "../../../context/MetadataContext.ts";
 import { updateRoomMetadata } from "../../../helper/helpers.ts";
 

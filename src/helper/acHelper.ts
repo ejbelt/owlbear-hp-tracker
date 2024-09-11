@@ -108,8 +108,8 @@ export const createACS = async (ac: number, token: Image) => {
         .visible(token.visible)
         .build();
 
-    acsShape.metadata[infoMetadataKey] = { isHpText: true, attachmentType: "AC" };
-    acsText.metadata[infoMetadataKey] = { isHPText: true, attachmentType: "AC" };
+    acsShape.metadata[infoMetadataKey] = { isHpText: true, attachmentType: "ACS" };
+    acsText.metadata[infoMetadataKey] = { isHPText: true, attachmentType: "ACS" };
     return [acsShape, acsText];
 };
 
@@ -155,7 +155,7 @@ export const updateAcsOffset = async (offset: { x: number; y: number }) => {
         changeMap.set(acCurve.id, change);
     }
 
-    await updateAcChanges(changeMap);
+    await updateAcsChanges(changeMap);
 };
 
 export const updateAc = async (token: Item, data: HpTrackerMetadata) => {
@@ -188,8 +188,8 @@ export const updateAcs = async (token: Item, data: HpTrackerMetadata) => {
         if (characters.length > 0) {
             const character = characters[0];
             const changes = new Map<string, ACSItemChanges>();
-            await saveOrChangeAC(character, data, acsAttachment, changes, visible);
-            await updateAcChanges(changes);
+            await saveOrChangeACS(character, data, acsAttachment, changes, visible);
+            await updateAcsChanges(changes);
         }
     }
 };
@@ -350,16 +350,16 @@ export const updateAcVisibility = async (tokens: Array<Item>) => {
 };
 
 export const updateAcsVisibility = async (tokens: Array<Item>) => {
-    const acChanges = new Map<string, ACSItemChanges>();
+    const acsChanges = new Map<string, ACSItemChanges>();
     for (const token of tokens) {
         const acsAttachments = (await getAttachedItems(token.id, ["CURVE"])).filter((a) => attachmentFilter(a, "ACS"));
         const data = token.metadata[itemMetadataKey] as HpTrackerMetadata;
 
         acsAttachments.forEach((curve) => {
-            const change = acChanges.get(curve.id) ?? {};
+            const change = acsChanges.get(curve.id) ?? {};
             if (curve.visible != (token.visible && data.canPlayersSee)) {
                 change.visible = token.visible && data.canPlayersSee;
-                acChanges.set(curve.id, change);
+                acsChanges.set(curve.id, change);
             }
         });
     }
