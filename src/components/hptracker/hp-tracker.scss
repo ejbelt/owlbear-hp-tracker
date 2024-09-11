@@ -7,7 +7,7 @@
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         justify-items: flex-start;
-        gap: 4px;
+        gap: 10px;
         border-bottom: 1px solid white;
         padding: 5px 5px 1px;
 
@@ -15,18 +15,18 @@
             cursor: pointer;
 
             &:hover {
-                font-weight: 600;
+                font-weight: 800;
             }
         }
 
         .current-hp {
             display: flex;
-            gap: 4px;
+            gap: 5px;
         }
 
         .armor-class {
             display: flex;
-            gap: 4px;
+            gap: 5px;
         }
 
         .armor-class-special {
