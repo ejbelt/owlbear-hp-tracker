@@ -30,8 +30,6 @@ const Player = (props: PlayerProps) => {
 
     const { setId } = useCharSheet();
 
-    const [currentSceneMetadata, setCurrentSceneMetadata] = useState<SceneMetadata | null>(null);
-
     const handleMetadata = (metadata: Metadata) => {
         if (metadata && sceneMetadata in metadata) {
             const sceneData = metadata[sceneMetadata] as SceneMetadata;
