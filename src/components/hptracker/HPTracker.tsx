@@ -66,6 +66,18 @@ const Player = (props: PlayerProps) => {
         });
     };
 
+    const handleOnPlayerClick = (event: MouseEvent) => {
+        OBR.scene.items.updateItems([props.id], (items) => {
+            items.forEach((item) => {
+                if (event.type === "mousedown") {
+                    item.rotation = 10;
+                } else {
+                    item.rotation = 0;
+                }
+            });
+        });
+    };
+
     const display = (): boolean => {
         return (
             props.data.hpTrackerActive &&
