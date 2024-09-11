@@ -132,6 +132,25 @@ const handleACOffsetUpdate = async (offset: { x: number; y: number }, ac: Item) 
     return change;
 };
 
+const handleACSOffsetUpdate = async (offset: { x: number; y: number }, acs: Item) => {
+    const change: ACSItemChanges = {};
+    if (acs.attachedTo) {
+        const tokens = await OBR.scene.items.getItems([acs.attachedTo]);
+        if (tokens.length > 0) {
+            const token = tokens[0];
+            const bounds = await getImageBounds(token as Image);
+            const barHeight = Math.ceil(bounds.height / 4.85);
+            const height = bounds.height / 2.3;
+            const width = Math.abs(bounds.width / 3);
+            change.position = {
+                x: bounds.position.x + (bounds.width < 0 ? 0 : bounds.width) - width / 2 + offset.x,
+                y: bounds.position.y + bounds.height - (height + barHeight) + offset.y,
+            };
+        }
+    }
+    return change;
+};
+
 export const updateAcOffset = async (offset: { x: number; y: number }) => {
     const acCurves = await OBR.scene.items.getItems(
         (item) => item.type === "CURVE" && infoMetadataKey in item.metadata
@@ -151,7 +170,7 @@ export const updateAcsOffset = async (offset: { x: number; y: number }) => {
     );
     const changeMap = new Map<string, ACSItemChanges>();
     for (const acCurve of acCurves) {
-        const change = await handleACOffsetUpdate(offset, acCurve);
+        const change = await handleACSOffsetUpdate(offset, acCurve);
         changeMap.set(acCurve.id, change);
     }
 
