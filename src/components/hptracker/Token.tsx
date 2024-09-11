@@ -154,6 +154,7 @@ export const Token = (props: TokenProps) => {
                         let temp_value = currentData.tempHp
                         if (Number(value) != 0) {
                             currentData.tempHp = allowNegativNumbers ? Number(value) : Math.max(Number(value), 0);
+                            console.log(currentData.tempHp)
                             let new_hp = currentData.hp + (currentData.tempHp - temp_value);
                             console.log(new_hp)
                             updateHpBar(data.hpBar, props.item.id, { ...data, hp: currentData.hp });
