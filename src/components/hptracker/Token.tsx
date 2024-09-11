@@ -25,7 +25,6 @@ export const Token = (props: TokenProps) => {
     const [editName, setEditName] = useState<boolean>(false);
     const [allowNegativNumbers, setAllowNegativeNumbers] = useState<boolean | undefined>(undefined);
     const { isReady } = SceneReadyContext();
-    const { setId } = useCharSheet();
     const hpRef = useRef<HTMLInputElement>(null);
 
     const sheetQuery = useGetOpen5eMonster(data.sheet ?? "");
