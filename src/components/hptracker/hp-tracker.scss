@@ -34,8 +34,15 @@
         }
 
         input[type="number"] {
+            border: none;
             background-color: transparent;
+            width: 40px;
             color: rgba(255, 255, 255, 0.87);
+            font-size: 1em;
+
+            &:disabled {
+                width: 40px;
+            }
         }
     }
 }
