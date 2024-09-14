@@ -27,6 +27,7 @@
 
     &.headings {
         display: none;
+        gap: 2px;
 
         @include breakpoint.laptop {
             display: grid;
