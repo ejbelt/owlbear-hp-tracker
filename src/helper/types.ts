@@ -10,7 +10,6 @@ export type HpTrackerMetadata = {
     hpOnMap: boolean;
     acOnMap: boolean;
     hpBar: boolean;
-    initiative: number;
     sheet: string;
     index?: number;
     group?: string;

@@ -172,9 +172,6 @@ export const Token = (props: TokenProps) => {
                             tempHp: currentData.tempHp,
                         });
                         setData({ ...data, tempHp: currentData.tempHp });
-                } else if (key === "initiative") {
-                    currentData.initiative = Number(value);
-                    setData({ ...data, initiative: currentData.initiative });
                 } else if (key === "hpMaxHp") {
                     currentData.maxHp = Math.max(Number(value), 0);
                     currentData.hp = Number(value);
@@ -464,29 +461,7 @@ export const Token = (props: TokenProps) => {
                     }}
                 />
             </div>
-            <div className={"initiative-wrapper"}>
-                <input
-                    type={"text"}
-                    size={1}
-                    value={data.initiative}
-                    onChange={(e) => {
-                        const value = Number(e.target.value.replace(/[^0-9]/g, ""));
-                        handleValueChange(value, "initiative");
-                    }}
-                    className={"initiative"}
-                />
-                <button
-                    title={"Roll Initiative (including DEX modifier from statblock)"}
-                    className={`toggle-button initiative-button`}
-                    onClick={() => {
-                        let dexBonus = 0;
-                        if (sheetData) {
-                            dexBonus = Math.floor((sheetData.dexterity - 10) / 2);
-                        }
-                        handleValueChange(Math.floor(Math.random() * 20) + 1 + dexBonus, "initiative");
-                    }}
-                />
-            </div>
+
         </div>
     ) : props.data.hpBar && props.item.visible ? (
         <div

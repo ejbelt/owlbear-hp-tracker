@@ -45,14 +45,6 @@
                         content: "ACS: ";
                     }
                 }
-
-                .initiative-wrapper {
-                    align-items: center;
-                    &::before {
-                        display: block;
-                        content: "Init: ";
-                    }
-                }
             }
         }
     }

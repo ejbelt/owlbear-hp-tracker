@@ -32,7 +32,6 @@ const initItems = async () => {
                     hpOnMap: false,
                     acOnMap: false,
                     hpBar: false,
-                    initiative: 0,
                     sheet: "",
                 };
                 item.metadata[characterMetadata] = initialMetadata;
@@ -192,7 +191,6 @@ const setupContextMenu = async () => {
                                 hpOnMap: false,
                                 acOnMap: false,
                                 hpBar: false,
-                                initiative: 0,
                                 sheet: "",
                             };
                             item.metadata[characterMetadata] = defaultMetadata;
