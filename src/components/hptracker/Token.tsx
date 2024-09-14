@@ -3,7 +3,6 @@ import { usePlayerContext } from "../../context/PlayerContext.ts";
 import React, { useEffect, useRef, useState } from "react";
 import OBR, { Item, Metadata } from "@owlbear-rodeo/sdk";
 import { characterMetadata, sceneMetadata } from "../../helper/variables.ts";
-import { useGetOpen5eMonster } from "../../open5e/useOpen5e.ts";
 import { SceneReadyContext } from "../../context/SceneReadyContext.ts";
 import { updateText } from "../../helper/textHelpers.ts";
 import { updateHpBar } from "../../helper/shapeHelpers.ts";
@@ -25,10 +24,6 @@ export const Token = (props: TokenProps) => {
     const [allowNegativNumbers, setAllowNegativeNumbers] = useState<boolean | undefined>(undefined);
     const { isReady } = SceneReadyContext();
     const hpRef = useRef<HTMLInputElement>(null);
-
-    const sheetQuery = useGetOpen5eMonster(data.sheet ?? "");
-
-    const sheetData = sheetQuery.isSuccess ? sheetQuery.data : null;
 
     const handleMetadata = (metadata: Metadata) => {
         if (metadata && sceneMetadata in metadata) {
