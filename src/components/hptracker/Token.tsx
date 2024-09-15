@@ -36,11 +36,11 @@ export const Token = (props: TokenProps) => {
         setData(props.data);
     }, [props.data]);
 
-    useEffect(() => {
-       if (hpRef && hpRef.current) {
-            hpRef.current.value = props.data.hp.toString();
-        }
-    }, [props.data.hp]);
+    //useEffect(() => {
+    //   if (hpRef && hpRef.current) {
+    //        hpRef.current.value = props.data.hp.toString();
+    //    }
+    //}, [props.data.hp]);
 
     useEffect(() => {
         const initMetadataValues = async () => {
