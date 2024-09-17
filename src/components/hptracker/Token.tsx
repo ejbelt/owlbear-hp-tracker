@@ -145,22 +145,22 @@ export const Token = (props: TokenProps) => {
                     setData({ ...data, hp: currentData.hp });
                 } else if (key === "tempHp") {
                     //Todo: Fix
-                        //let temp_value = currentData.tempHp
-                        //if (Number(value) != 0) {
-                            //let new_hp = currentData.hp + (currentData.tempHp - temp_value);
-                            //updateHpBar(data.hpBar, props.item.id, { ...data, hp: currentData.hp });
-                            //updateText(data.hpOnMap || data.acOnMap, data.canPlayersSee && props.item.visible, props.item.id, {
-                            //    ...data,
-                            //    hp: currentData.hp,
-                            //});
-                            //setData({ ...data, hp: currentData.hp });
-                        //} else {
+                        let temp_value = currentData.tempHp
+                        if (Number(value) != 0) {
+                            let new_hp = currentData.hp + (currentData.tempHp - temp_value);
+                            updateHpBar(data.hpBar, props.item.id, { ...data, hp: currentData.hp });
+                            updateText(data.hpOnMap || data.acOnMap, data.canPlayersSee && props.item.visible, props.item.id, {
+                                ...data,
+                                hp: currentData.hp,
+                            });
+                            setData({ ...data, hp: currentData.hp });
+                        } else {
                             currentData.tempHp = allowNegativNumbers ? Number(value) : Math.max(Number(value), 0);
-                            //updateText(data.hpOnMap || data.acOnMap, data.canPlayersSee && props.item.visible, props.item.id, {
-                            //    ...data,
-                            //    hp: currentData.hp,
-                            //});
-                        //}
+                            updateText(data.hpOnMap || data.acOnMap, data.canPlayersSee && props.item.visible, props.item.id, {
+                                ...data,
+                                hp: currentData.hp,
+                            });
+                        }
                         currentData.tempHp = allowNegativNumbers ? Number(value) : Math.max(Number(value), 0);
                         updateText(data.hpOnMap || data.acOnMap, data.canPlayersSee && props.item.visible, props.item.id, {
                             ...data,
