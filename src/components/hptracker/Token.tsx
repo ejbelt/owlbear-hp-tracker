@@ -1,6 +1,6 @@
 import { HpTrackerMetadata, SceneMetadata } from "../../helper/types.ts";
 import { usePlayerContext } from "../../context/PlayerContext.ts";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import OBR, { Item, Metadata } from "@owlbear-rodeo/sdk";
 import { characterMetadata, sceneMetadata } from "../../helper/variables.ts";
 import { SceneReadyContext } from "../../context/SceneReadyContext.ts";
@@ -225,7 +225,7 @@ export const Token = (props: TokenProps) => {
             return "#242424";
         }
 
-        const percent = props.data.hp / props.data.maxHp+data.tempHp;
+        const percent = props.data.hp / props.data.maxHp+props.data.tempHp;
 
         const g = 255 * percent;
         const r = 255 - 255 * percent;
@@ -328,9 +328,10 @@ export const Token = (props: TokenProps) => {
             <div className={"current-hp"}>
                 <input
                     //ref={hpRef}
+                    value={data.hp}
                     type={"text"}
                     size={3}
-                    defaultValue={data.hp}
+                    //defaultValue={data.hp}
                     onBlur={(e) => {
                         const input = e.target.value;
                         const hp = getNewHpValue(input);
