@@ -23,7 +23,7 @@ export const Token = (props: TokenProps) => {
     const [editName, setEditName] = useState<boolean>(false);
     const [allowNegativNumbers, setAllowNegativeNumbers] = useState<boolean | undefined>(undefined);
     const { isReady } = SceneReadyContext();
-    const hpRef = useRef<HTMLInputElement>(null);
+    //const hpRef = useRef<HTMLInputElement>(null);
 
     const handleMetadata = (metadata: Metadata) => {
         if (metadata && sceneMetadata in metadata) {
@@ -327,7 +327,7 @@ export const Token = (props: TokenProps) => {
             ) : null}
             <div className={"current-hp"}>
                 <input
-                    ref={hpRef}
+                    //ref={hpRef}
                     type={"text"}
                     size={3}
                     defaultValue={data.hp}
