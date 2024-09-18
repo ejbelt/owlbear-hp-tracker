@@ -1,6 +1,6 @@
 import { HpTrackerMetadata, SceneMetadata } from "../../helper/types.ts";
 import { usePlayerContext } from "../../context/PlayerContext.ts";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import OBR, { Item, Metadata } from "@owlbear-rodeo/sdk";
 import { characterMetadata, sceneMetadata } from "../../helper/variables.ts";
 import { SceneReadyContext } from "../../context/SceneReadyContext.ts";
@@ -23,7 +23,7 @@ export const Token = (props: TokenProps) => {
     const [editName, setEditName] = useState<boolean>(false);
     const [allowNegativNumbers, setAllowNegativeNumbers] = useState<boolean | undefined>(undefined);
     const { isReady } = SceneReadyContext();
-    //const hpRef = useRef<HTMLInputElement>(null);
+    const hpRef = useRef<HTMLInputElement>(null);
 
     const handleMetadata = (metadata: Metadata) => {
         if (metadata && sceneMetadata in metadata) {
@@ -36,11 +36,11 @@ export const Token = (props: TokenProps) => {
         setData(props.data);
     }, [props.data]);
 
-    //useEffect(() => {
-    //   if (hpRef && hpRef.current) {
-    //        hpRef.current.value = props.data.hp.toString();
-    //    }
-    //}, [props.data.hp]);
+    useEffect(() => {
+       if (hpRef && hpRef.current) {
+            hpRef.current.value = props.data.hp.toString();
+        }
+    }, [props.data.hp]);
 
     useEffect(() => {
         const initMetadataValues = async () => {
@@ -327,11 +327,10 @@ export const Token = (props: TokenProps) => {
             ) : null}
             <div className={"current-hp"}>
                 <input
-                    //ref={hpRef}
-                    value={data.hp}
+                    ref={hpRef}
                     type={"text"}
                     size={3}
-                    //defaultValue={data.hp}
+                    defaultValue={data.hp}
                     onBlur={(e) => {
                         const input = e.target.value;
                         const hp = getNewHpValue(input);
